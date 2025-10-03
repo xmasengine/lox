@@ -1,8 +1,19 @@
-// png2bas converts paletted PNG or GIF files with sprites to basic
-// BITMAP, preserving the palette as PALETTE statements.
-// Currently this tool is for use with cvbasic for master system only.
-// The bitmaps are exported in 8x16 cells for sprites, and empty
-// sprites will be skipped.
+// res2bas converts resources such as images to basic.
+// Currently it targets CVBasic and the Master System.
+//
+// The default mode is to convert sprites from a
+// paletted PNG or GIF file to basic BITMAP statements,
+// preserving the palette as PALETTE statements.
+// The paletted images mmust have 16 or less colors,
+// and color 0 is the transparent color.
+// The bitmaps are exported in 8x16 cells, and empty sprites will be skipped.
+//
+// In tile mode this tool convert sprites from a
+// paletted PNG or GIF file to basic BITMAP statements
+// preserving the palette as PALETTE statements.
+// The paletted images mmust have 16 or less colors,
+// and color 0 is the transparent color.
+// The bitmaps are exported in 8x16 cells, and empty times will be kept.
 package main
 
 import (
@@ -28,10 +39,12 @@ func main() {
 	var img string
 	var bas string
 	var pre string
+	var mod string
 
 	flag.StringVar(&img, "i", "", "input png or GIF file name or STDIN by default")
 	flag.StringVar(&bas, "o", "", "output bas file name or STDOUT by default")
 	flag.StringVar(&pre, "p", "sprite", "label prefix in basic output")
+	flag.StringVar(&mod, "m", "sprite", "mode, one of sprite,tile,map,defpal")
 	flag.Parse()
 
 	in := os.Stdin
@@ -47,6 +60,10 @@ func main() {
 		out, err = os.Create(bas)
 		errExit(err)
 		defer out.Close()
+	}
+
+	if mod == "defpal" {
+		defpal(out)
 	}
 
 	decoded, _, err := image.Decode(in)
@@ -65,6 +82,17 @@ func col2b(col color.Color) byte {
 	g := byte(cb >> 14)
 	r := byte(cg >> 14)
 	return r<<4 | g<<2 | b
+}
+
+var pal = []byte{
+	0x00, 0x00, 0x0c, 0x2e, 0x20, 0x30, 0x02, 0x3c, 0x17, 0x2B, 0x0f, 0x2f, 0x08, 0x33, 0x2a, 0x3f}
+
+var names = []string{
+	"Transparent", "Black", "Green", "Lime", "Navy", "Blue", "Brown", "Cyan",
+	"Red", "Scarlet", "Khaki", "Yellow", "Leaf", "Magenta", "Gray", "White",
+}
+
+func defpal(out *os.File) {
 }
 
 func generate(out *os.File, bitmap image.PalettedImage, pre string, cw, ch int) {
