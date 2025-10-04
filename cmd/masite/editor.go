@@ -135,7 +135,7 @@ func (e *Editor) Update() error {
 				}
 				e.Cell.Index = byte(max(0, idx))
 			})
-		case inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft):
+		case ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft):
 			e.Map.Put(e.Tile, e.Cell)
 		default:
 		}
