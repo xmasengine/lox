@@ -1,6 +1,7 @@
 package main
 
 import "image"
+import "strconv"
 import "slices"
 import "fmt"
 import "errors"
@@ -15,10 +16,11 @@ type Midget struct {
 	Kids   []Game
 	Bounds Rectangle
 	Style
-	Done bool
-	Drag bool
-	Lock bool
-	From Point
+	Done   bool
+	Drag   bool
+	Lock   bool
+	From   Point
+	Frames int
 }
 
 func MakeMidget(bounds Rectangle) Midget {
@@ -38,12 +40,12 @@ func (m *Midget) IsMouseIn() bool {
 }
 
 func (m *Midget) Update() error {
+	m.Frames++
 	err := m.UpdateKids()
 	if err != nil {
 		return err
 	}
-	m.UpdateDrag()
-	return nil
+	return m.UpdateDrag()
 }
 
 func (m *Midget) Draw(s *Surface) {
@@ -106,6 +108,7 @@ func (m *Midget) UpdateDrag() error {
 			delta := now.Sub(m.From)
 			m.Bounds = m.Bounds.Add(delta)
 			m.From = now
+			return MidgetOK
 		}
 	}
 	return nil
@@ -129,6 +132,11 @@ func DefaultStyle() Style {
 	s.Shadow = RGBA{R: 0x00, G: 0x00, B: 0x00, A: 0xaa}
 	s.Filled = RGBA{R: 0x00, G: 0x00, B: 0x55, A: 0xaa}
 	s.Stroke = 1
+	return s
+}
+
+func (s Style) ForError() Style {
+	s.Filled = RGBA{R: 0x55, G: 0x00, B: 0x00, A: 0xaa}
 	return s
 }
 
@@ -218,12 +226,16 @@ type Asker struct {
 	Midget
 	Prompt string
 	Buf    []rune
-	On     func(string)
+	On     func(string) bool
 	Cursor int
 }
 
-func Ask(bounds Rectangle, prompt, def string, on func(res string)) *Asker {
-	return &Asker{Midget: MakeMidget(bounds), Prompt: prompt, On: on, Buf: []rune(def)}
+func Ask(bounds Rectangle, prompt, def string, on func(res string) bool) *Asker {
+	a := &Asker{Midget: MakeMidget(bounds),
+		Prompt: prompt, On: on, Buf: []rune(def),
+	}
+	a.Cursor = len(a.Buf)
+	return a
 }
 
 func (a *Asker) Update() error {
@@ -232,22 +244,39 @@ func (a *Asker) Update() error {
 	for _, key := range keys {
 		switch key {
 		case ebiten.KeyEnter:
-			a.On(string(a.Buf))
-			return Termination
-		case ebiten.KeyEscape:
-			println("esc in ", a.Prompt)
-			return Termination
-		case ebiten.KeyBackspace:
-			if len(a.Buf) > 0 {
-				a.Buf = slices.Delete(a.Buf, len(a.Buf)-1, len(a.Buf))
+			done := a.On(string(a.Buf))
+			if done {
+				return Termination
 			}
+		case ebiten.KeyEnd:
+			a.Cursor = len(a.Buf)
+		case ebiten.KeyHome:
+			a.Cursor = 0
+		case ebiten.KeyLeft:
+			a.Cursor = max(0, a.Cursor-1)
+		case ebiten.KeyRight:
+			a.Cursor = min(a.Cursor+1, len(a.Buf))
+		case ebiten.KeyEscape:
+			return Termination
+		case ebiten.KeyDelete:
+			if len(a.Buf) > 0 && a.Cursor < len(a.Buf) {
+				a.Buf = slices.Delete(a.Buf, a.Cursor, a.Cursor+1)
+			}
+		case ebiten.KeyBackspace:
+			if len(a.Buf) > 0 && a.Cursor > 0 {
+				a.Buf = slices.Delete(a.Buf, a.Cursor-1, a.Cursor)
+			}
+			a.Cursor = max(0, a.Cursor-1)
 		}
 	}
 
-	var chars []rune
-	chars = ebiten.AppendInputChars(chars)
-	if len(chars) > 0 {
-		a.Buf = append(a.Buf, chars...)
+	if a.Frames > 30 { // debounce previous input when the Asker is opened.
+		var chars []rune
+		chars = ebiten.AppendInputChars(chars)
+		if len(chars) > 0 {
+			a.Buf = slices.Insert(a.Buf, a.Cursor, chars...)
+		}
+		a.Cursor += len(chars)
 	}
 	a.Midget.Update()
 	return MidgetOK
@@ -255,8 +284,12 @@ func (a *Asker) Update() error {
 
 func (a Asker) Draw(s *Surface) {
 	a.Midget.Draw(s)
+	// Simulate a cursor with a pipe character to simplify rendering.
 	ebitenutil.DebugPrintAt(s,
-		fmt.Sprintf("%s>%s|", a.Prompt, string(a.Buf)),
+		fmt.Sprintf("%s>%s|%s", a.Prompt,
+			string(a.Buf[0:a.Cursor]),
+			string(a.Buf[a.Cursor:]),
+		),
 		a.Bounds.Min.X, a.Bounds.Min.Y)
 }
 
@@ -264,19 +297,55 @@ func Bounds(x, y, w, h int) Rectangle {
 	return image.Rect(x, y, x+w, y+h)
 }
 
-func (m *Midget) Ask(x, y, w, h int, prompt, def string, on func(res string)) *Asker {
+func (m *Midget) Ask(x, y, w, h int, prompt, def string, on func(res string) bool) *Asker {
 	ask := Ask(Bounds(x, y, w, h), prompt, def, on)
 	m.Add(ask)
 	return ask
 }
 
 func (m *Midget) YesNo(x, y, w, h int, prompt, def string, on func(res bool)) *Asker {
-	wrap := func(sres string) {
+	wrap := func(sres string) bool {
 		on(sres == def)
+		return true
 	}
 	ask := Ask(Bounds(x, y, w, h), prompt, def, wrap)
 	m.Add(ask)
 	return ask
+}
+
+func Accept(sres string) bool { return true }
+
+func (m *Midget) Error(x, y, w, h int, err error) *Asker {
+	if err == nil {
+		return nil
+	}
+	msg := err.Error()
+	ask := Ask(Bounds(x, y, max(w, len(msg)*8), h), msg, "", Accept)
+	ask.Style = ask.Style.ForError()
+	m.Add(ask)
+	return ask
+}
+
+func (m *Midget) AskString(x, y, w, h int, prompt string, str *string) *Asker {
+	on := func(sres string) bool {
+		*str = sres
+		return true
+	}
+	return m.Ask(x, y, w, h, prompt, *str, on)
+}
+
+func (m *Midget) AskInt(x, y, w, h int, prompt string, i *int) *Asker {
+	on := func(sres string) bool {
+		res, err := strconv.Atoi(sres)
+		if err == nil {
+			*i = res
+			return true
+		} else {
+			m.Error(x+20, y+20, w, h, err)
+			return false
+		}
+	}
+	return m.Ask(x, y, w, h, prompt, strconv.Itoa(*i), on)
 }
 
 type Tiler struct {
@@ -309,16 +378,14 @@ func (t *Tiler) Update() error {
 	}
 	mouse := t.RelativeMouse()
 	tile := image.Pt(mouse.X/t.Tw, mouse.Y/t.Th)
-
+	t.Cursor = tile
+	err := t.Midget.Update()
 	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 		t.Selected = tile
 		t.On(tile.X, tile.Y)
+		return MidgetOK
 	}
-	t.Cursor = tile
-
-	t.Midget.Update()
-
-	return MidgetOK
+	return err
 }
 
 func (t Tiler) Draw(s *Surface) {

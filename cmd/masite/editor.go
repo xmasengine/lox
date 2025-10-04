@@ -26,14 +26,21 @@ type Editor struct {
 func (e Editor) Draw(screen *ebiten.Image) {
 	if e.Map != nil {
 		e.Map.Render(screen, e.Camera)
+		if e.Tile.In(image.Rect(0, 0, e.Map.Width-1, e.Map.Height-1)) {
+			e.Midget.Style.DrawCursor(screen,
+				Bounds(e.Tile.X*e.Map.Tw, e.Tile.Y*e.Map.Th, e.Map.Tw, e.Map.Th).Add(e.Camera.Min),
+			)
+		}
 	}
+
+	kl := len(e.Midget.Kids)
 	if e.Error != nil {
-		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Error: %s", e.Error),
+		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Error: %s [%d]", e.Error, kl),
 			e.Map.Width*e.Map.Tw, 10,
 		)
 	} else {
-		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("%s: (%d,%d): %d %d",
-			e.Name, e.Hover.X, e.Hover.Y, e.Cell.Index, e.Cell.Flag,
+		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("%s: (%d,%d): %d %d [%d]",
+			e.Name, e.Hover.X, e.Hover.Y, e.Cell.Index, e.Cell.Flag, kl,
 		), e.Map.Width*e.Map.Tw, 10)
 	}
 	e.Midget.Draw(screen)
@@ -89,16 +96,35 @@ func (e *Editor) Update() error {
 		case inpututil.IsKeyJustPressed(ebiten.KeyF10):
 			e.Error = nil
 		case inpututil.IsKeyJustPressed(ebiten.KeyF1):
-			e.Midget.Ask(100, 0, 250, 200, HELP, "", func(name string) {})
+			e.Midget.Ask(100, 0, 250, 200, HELP, "", Accept)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF2):
 			e.Midget.Ask(50, 50, 250, 100, "Save As", e.Name,
-				func(name string) {
-					e.Error = e.Map.Save(name)
+				func(name string) bool {
+					err := e.Map.Save(name)
+					e.Error = err
+					e.Midget.Error(70, 70, 270, 120, err)
 					if e.Error == nil {
 						e.Name = name
+						return true
 					}
+					return false
 				},
 			)
+		case inpututil.IsKeyJustPressed(ebiten.KeyF):
+			e.Midget.Ask(50, 50, 250, 100, "From", e.Map.From,
+				func(name string) bool {
+					err := e.Map.LoadSurface(name)
+					e.Error = err
+					e.Midget.Error(70, 70, 270, 120, err)
+					return e.Error == nil
+				},
+			)
+		case inpututil.IsKeyJustPressed(ebiten.KeyP):
+			e.Midget.AskString(50, 50, 250, 100, "Prefix", &e.Map.Prefix)
+		case inpututil.IsKeyJustPressed(ebiten.KeyO):
+			e.Midget.AskInt(50, 50, 250, 100, "Offset", &e.Map.Offset)
+		case inpututil.IsKeyJustPressed(ebiten.KeyS):
+			e.Midget.AskInt(50, 50, 250, 100, "UI Scale", &e.Scale)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF3):
 			e.Midget.Tile(200, 100, e.Map.Surface, func(x, y int) {
 				_, h := e.Map.Surface.Size()

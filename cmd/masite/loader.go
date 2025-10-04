@@ -3,6 +3,7 @@ package main
 import "github.com/hajimehoshi/ebiten/v2"
 import "io/fs"
 import "io"
+import "errors"
 import _ "image/png"
 import _ "image/jpeg"
 import _ "image/gif"
@@ -75,6 +76,18 @@ func FirstAvailable[T any](cbs ...func() (T, error)) func() (T, error) {
 	}
 }
 
+func DecodePaletted(rd io.Reader) (image.PalettedImage, error) {
+	img, _, err := image.Decode(rd)
+	if err != nil {
+		return nil, err
+	}
+	pal, ok := img.(image.PalettedImage)
+	if !ok {
+		return nil, errors.New("Not a paletted image")
+	}
+	return pal, nil
+}
+
 func DecodeSurface(rd io.Reader) (*Surface, error) {
 	img, _, err := image.Decode(rd)
 	if err != nil {
@@ -91,6 +104,15 @@ func DecodeSurfaceAndImage(rd io.Reader) (*Surface, Image, error) {
 	}
 	eimg := ebiten.NewImageFromImage(img)
 	return eimg, img, nil
+}
+
+func LoadPaletted(cb func() (io.ReadCloser, error)) (image.PalettedImage, error) {
+	rd, err := cb()
+	if err != nil {
+		return nil, err
+	}
+	defer rd.Close()
+	return DecodePaletted(rd)
 }
 
 func LoadSurface(cb func() (io.ReadCloser, error)) (*Surface, error) {
