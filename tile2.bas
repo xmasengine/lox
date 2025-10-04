@@ -1,6 +1,6 @@
 	' TMSColor 3.2 Aug/26/2025
-	' Command: tmscolor -b -sms -i ./img/tile2.png tile2.bas tile2
-	' Created: Fri Oct  3 20:49:43 2025
+	' Command: tmscolor -b -sms -i ./img/tile2.png tile2.bas tile2 
+	' Created: Sat Oct  4 00:45:25 2025
 
 tile2_bitmap:
 	BITMAP "CCCCCCCC"

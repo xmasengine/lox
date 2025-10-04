@@ -6,7 +6,7 @@ BLIB = $(HOME)/opt/nanochess/CVBasic
 ASM = gasm80
 ASMFLAGS = -sms
 EMU=mg -scale 5
-DEPS=nun.bas sprite1.bas tile2.bas
+DEPS=nun.bas sprite1.bas tile2.bas map1.bas
 
 build: build/lox.sms
 	@echo "Built $<"

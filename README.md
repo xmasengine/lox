@@ -2,6 +2,21 @@
 
 Lord Of Xmas: A Chistian Action RPG for the Master System.
 
+# Tools
+
+## Masite
+
+In the directory cmd/masite is Masite a MAster System Integrated Tilemap Editor.
+It is a graphical tile map editor implemented in Go an ebitengine.
+Used it edit tile maps for use with SMS and CVBasic.
+
+## Res2bas
+
+In the directory cmd/res2bas is the Res2bas command line tool.
+It is a command line tool in Go to convert resources to cvbasic.
+The res2bas tool only supports palette images with a palette of up to 16 colors.
+
+
 # Implementation
 
 This game is implemented using the following tools:
@@ -15,6 +30,7 @@ https://github.com/nanochess/gasm80
 
 The open source version of this game, as well as the tools in this repository
 are licenced under the SleepyCat license below.
+
 This is a simple copy left license. It means you may read the source code,
 compile it yourself and modify it, but if you distribute the SMS ROM of this
 game or anything based on it, you also have to distribute the source code of

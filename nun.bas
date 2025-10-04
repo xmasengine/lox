@@ -1,12 +1,6 @@
 	' TMSColor 3.2 Aug/26/2025
-	' Command: tmscolor -sms -p2 -b -t128 nun.png nun.bas nun 
+	' Command: tmscolor -sms -p2 -b -t128 nun.png nun.bas nun
 	' Created: Thu Oct  2 01:00:13 2025
-
-	' Display image.
-	MODE 4
-	DEFINE CHAR 128,64,nun_char
-	SCREEN nun_pattern,0,0,8,8,8
-	WHILE 1: WEND
 
 	' Start tile = 128. Total_tiles = 64
 nun_char:
