@@ -170,6 +170,8 @@ func (m *Map) Save(to string) error {
 	return err
 }
 
+var blockColor = RGBA{R: 66, B: 66, G: 66, A: 0xaa}
+
 func (m *Map) Render(screen *Surface, camera Rectangle) {
 	ab := m.Surface.Bounds()
 
@@ -208,13 +210,20 @@ func (m *Map) Render(screen *Surface, camera Rectangle) {
 				opts.GeoM.Scale(1, -1)
 				opts.GeoM.Translate(0, float64(m.Th))
 			}
-			opts.GeoM.Translate(
-				float64(int(tx)*m.Tw-camera.Min.X),
-				float64(int(ty)*m.Th-camera.Min.Y),
-			)
+
+			atx := int(tx)*m.Tw - camera.Min.X
+			aty := int(ty)*m.Th - camera.Min.Y
+
+			opts.GeoM.Translate(float64(atx), float64(aty))
 
 			if sub != nil {
 				screen.DrawImage(sub, &opts)
+			}
+
+			to := Bounds(atx, atx, m.Tw, m.Th)
+
+			if cell.Flag&FlagSolid != 0 {
+				DrawRect(screen, to, 3, blockColor)
 			}
 		}
 	}

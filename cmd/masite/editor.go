@@ -93,6 +93,12 @@ func (e *Editor) Update() error {
 			e.Cell.Flag ^= FlagHorizontalFlip
 		case inpututil.IsKeyJustPressed(ebiten.KeyV):
 			e.Cell.Flag ^= FlagVerticalFlip
+		case inpututil.IsKeyJustPressed(ebiten.KeyN):
+			e.Cell.Flag ^= FlagOnTop
+		case inpututil.IsKeyJustPressed(ebiten.KeyB):
+			e.Cell.Flag ^= FlagSolid
+		case inpututil.IsKeyJustPressed(ebiten.KeyG):
+			e.Midget.AskFlag(50, 50, 250, 100, "Flag", &e.Cell.Flag)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF10):
 			e.Error = nil
 		case inpututil.IsKeyJustPressed(ebiten.KeyF1):

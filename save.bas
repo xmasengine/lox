@@ -10,6 +10,12 @@ DEF FN SRAM_FINI = POKE $FFFC,$00
 DEF FN SRAM_SAVE(OFFSET, VALUE) = POKE $8000+OFFSET,VALUE
 DEF FN SRAM_READ(OFFSET) = PEEK($8000+OFFSET)
 
+DEF FN SRAM_READA(A,L,I,O) = FOR I = 0 TO (L-1): A(I) = SRAM_READ(O+I): NEXT I
+DEF FN SRAM_SAVEA(A,L,I,O) = FOR I = 0 TO (L-1): SRAM_SAVE(O+I,A(I)): NEXT I
+
+DEF FN PRINTA(A,L, I) = FOR I = 0 TO (L-1): PRINT CHR$(arr(I)): NEXT I
+DEF FN PRINTI(I) = WHILE I > 0: PRINT CHR$(49+I%10): I=I/10: WEND
+
 DIM #sram_offset
 DIM #sram_data_length
 DIM sram_data(64)
@@ -52,16 +58,13 @@ main:
 	dim I
 
 	SRAM_INIT
-	FOR I = 0 TO 4
-		arr(I) = SRAM_READ(1+I)
-	NEXT I
+	SRAM_READA(arr, 5, I, 1)
 	SRAM_FINI
 
 	PRINT "-1... "
-	FOR I = 0 TO 4
-		PRINT CHR$(arr(I))
-	NEXT I
+	PRINTA(arr, 5, I)
 
+	FOR I = 0 TO 5: arr(I) = I+70: NEXT I
 	dim res
 	SRAM_INIT
 	res = SRAM_READ(0)
@@ -74,9 +77,7 @@ main:
 	SRAM_FINI
 	PRINT "2... "
 	SRAM_INIT
-	FOR I = 0 TO 4
-		SRAM_SAVE(1+I,arr(I))
-	NEXT I
+	SRAM_SAVEA(arr, 5, I, 1)
 	SRAM_FINI
 	PRINT "3... "
 	SRAM_INIT
@@ -90,14 +91,15 @@ main:
 		PRINT ": WRITE FAIL"
 	end if
 	SRAM_INIT
-	FOR I = 0 TO 4
-		arr(I) = SRAM_READ(1+I)
-	NEXT I
+	SRAM_READA(arr, 5, I, 1)
 	SRAM_FINI
 	PRINT "5... "
-	FOR I = 0 TO 4
-		PRINT CHR$(arr(I))
-	NEXT I
+	PRINTA(arr, 5, I)
+
+	dim #foo
+	#foo = 12345
+	PRINTI(#foo)
+
 
 	while 1
 	wend

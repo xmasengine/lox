@@ -348,6 +348,34 @@ func (m *Midget) AskInt(x, y, w, h int, prompt string, i *int) *Asker {
 	return m.Ask(x, y, w, h, prompt, strconv.Itoa(*i), on)
 }
 
+func (m *Midget) AskByte(x, y, w, h int, prompt string, i *byte) *Asker {
+	on := func(sres string) bool {
+		res, err := strconv.Atoi(sres)
+		if err == nil {
+			*i = byte(res)
+			return true
+		} else {
+			m.Error(x+20, y+20, w, h, err)
+			return false
+		}
+	}
+	return m.Ask(x, y, w, h, prompt, strconv.Itoa(int(*i)), on)
+}
+
+func (m *Midget) AskFlag(x, y, w, h int, prompt string, i *Flag) *Asker {
+	on := func(sres string) bool {
+		res, err := strconv.Atoi(sres)
+		if err == nil {
+			*i = Flag(res)
+			return true
+		} else {
+			m.Error(x+20, y+20, w, h, err)
+			return false
+		}
+	}
+	return m.Ask(x, y, w, h, prompt, strconv.Itoa(int(*i)), on)
+}
+
 type Tiler struct {
 	Midget
 	On       func(x, y int)

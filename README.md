@@ -77,3 +77,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * img/tile2.png: CC0 By Chasersgaming:  https://chasersgaming.itch.io/rpg-militarybasesms
 
 
+
+# Tile map designs
+
+
+
+
+
+
+
+
+
+

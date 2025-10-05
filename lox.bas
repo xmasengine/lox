@@ -77,7 +77,6 @@ DIM player_sprite_d
 start:
 ' Set up screen
 	MODE 4
-	SPRITE FLICKER OFF
 	BORDER 12
 	CLS
 
