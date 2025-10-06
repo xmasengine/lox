@@ -5,16 +5,20 @@ OPTION EXPLICIT
 DEF FN PRINT_XY(X, Y, S) = PRINT AT X+Y*32,S
 
 ' Save ram macros
-DEF FN SRAM_INIT = POKE $FFFC,$08
-DEF FN SRAM_FINI = POKE $FFFC,$00
-DEF FN SRAM_SAVE(OFFSET, VALUE) = POKE $8000+OFFSET,VALUE
-DEF FN SRAM_READ(OFFSET) = PEEK($8000+OFFSET)
+const #SRAM_PORT = $FFFC
+CONST #SRAM_ADDR = $8000
+DEF FN SRAM_INIT = POKE #SRAM_PORT,$08
+DEF FN SRAM_FINI = POKE #SRAM_PORT,$00
+DEF FN SRAM_SAVE(OFFSET, VALUE) = POKE #SRAM_ADDR+OFFSET,VALUE
+DEF FN SRAM_READ(OFFSET) = PEEK(#SRAM_ADDR+OFFSET)
 
 DEF FN SRAM_READA(A,L,I,O) = FOR I = 0 TO (L-1): A(I) = SRAM_READ(O+I): NEXT I
 DEF FN SRAM_SAVEA(A,L,I,O) = FOR I = 0 TO (L-1): SRAM_SAVE(O+I,A(I)): NEXT I
 
+DEF FN SRAM_READP(P,L,I,O) = FOR I = 0 TO (L-1): P(I) = SRAM_READ(P+I): NEXT I
+DEF FN SRAM_SAVEP(P,L,I,O) = FOR I = 0 TO (L-1): SRAM_SAVE(P+I,P(I)): NEXT I
+
 DEF FN PRINTA(A,L, I) = FOR I = 0 TO (L-1): PRINT CHR$(arr(I)): NEXT I
-DEF FN PRINTI(I) = WHILE I > 0: PRINT CHR$(49+I%10): I=I/10: WEND
 
 DIM #sram_offset
 DIM #sram_data_length
@@ -30,10 +34,6 @@ DIM sram_write_error
 ' /* SRAM access is as easy as accessing an array of char */
 ' __at (0x8000) unsigned char SMS_SRAM[];
 
-const SRAM_PORT = $FFFC
-const SRAM_OPEN = $08
-const SRAM_DONE = $00
-CONST SRAM_ADDR = $8000
 
 ' ASM sram_init:
 ' ASM di
@@ -90,15 +90,21 @@ main:
 	else
 		PRINT ": WRITE FAIL"
 	end if
+	dim try
 	SRAM_INIT
 	SRAM_READA(arr, 5, I, 1)
+	sram_label: DATA BYTE #SRAM_ADDR
+	try = sram_label(3)
 	SRAM_FINI
 	PRINT "5... "
 	PRINTA(arr, 5, I)
+	PRINT "6... "
+	PRINT CHR$(try)
+	PRINT "7... "
 
 	dim #foo
 	#foo = 12345
-	PRINTI(#foo)
+	PRINT #foo
 
 
 	while 1

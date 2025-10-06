@@ -78,6 +78,7 @@ start:
 ' Set up screen
 	MODE 4
 	BORDER 12
+	SPRITE FLICKER OFF
 	CLS
 
 ' Display opening image
