@@ -12,15 +12,18 @@ import (
 )
 
 type Editor struct {
-	Name   string
-	Map    *Map
-	Camera image.Rectangle
-	Hover  image.Point
-	Tile   image.Point // Tile we are hovering
-	Cell   Cell
-	Scale  int
-	Error  error
-	Midget Midget // Child mini widgets
+	Name         string
+	Map          *Map
+	Camera       image.Rectangle
+	Hover        image.Point
+	Tile         image.Point // Tile we are hovering
+	Cell         Cell
+	Scale        int
+	Error        error
+	Message      string
+	Midget       Midget // Child mini widgets
+	TileWatcher  *Watcher
+	MessageTicks int
 }
 
 func (e Editor) Draw(screen *ebiten.Image) {
@@ -43,12 +46,76 @@ func (e Editor) Draw(screen *ebiten.Image) {
 			e.Name, e.Hover.X, e.Hover.Y, e.Cell.Index, e.Cell.Flag, kl,
 		), e.Map.Width*e.Map.Tw, 10)
 	}
+	if e.Message != "" {
+		ebitenutil.DebugPrintAt(screen, e.Message, e.Map.Width*e.Map.Tw, 20)
+	}
 	e.Midget.Draw(screen)
 }
 
 func (e Editor) Layout(w, h int) (rw, th int) {
 	e.Midget.Layout(w, h)
 	return e.Camera.Dx() / e.Scale, e.Camera.Dy() / e.Scale
+}
+
+func (e *Editor) UpdateTilers() {
+	if e.Map == nil || e.Map.Surface == nil {
+		return
+	}
+	for _, sub := range e.Midget.Kids {
+		if tiler, ok := sub.(*Tiler); ok {
+			tiler.Surface = e.Map.Surface
+		}
+	}
+}
+
+func (e *Editor) LoadSurface(name string) bool {
+	if e.TileWatcher != nil {
+		e.TileWatcher.Done <- struct{}{}
+		e.TileWatcher = nil
+	}
+	e.TileWatcher = Watch(name)
+	err := e.Map.LoadSurface(name)
+	if err != nil {
+		e.UpdateTilers()
+	}
+	e.Error = err
+	e.Midget.Error(70, 70, 270, 120, err)
+	return e.Error == nil
+}
+
+func (e *Editor) UpdateWatcher() bool {
+	if e.MessageTicks > 0 {
+		e.MessageTicks--
+	} else {
+		e.Message = ""
+	}
+	if e.TileWatcher == nil {
+		return false
+	}
+	select {
+	case name := <-e.TileWatcher.C:
+		err := e.Map.LoadSurface(name)
+		e.Error = err
+		e.Midget.Error(70, 70, 270, 120, err)
+		if e.Error == nil {
+			e.Message = "Auto update tiles: " + name
+			e.MessageTicks = 60 * 15
+			e.UpdateTilers()
+		}
+		return e.Error == nil
+	default:
+		return false
+	}
+}
+
+func (e *Editor) TileSelected(x, y int) {
+	_, h := e.Map.Surface.Size()
+	idx := x + y*(h/e.Map.Th)
+	if idx > 255 {
+		idx -= 255
+		e.Cell.Flag |= FlagExtended
+	}
+	e.Cell.Index = byte(max(0, idx))
 }
 
 const HELP = `HELP
@@ -75,6 +142,8 @@ func (e *Editor) Update() error {
 	} else if wheel < 0 {
 		e.Cell.Index = max(0, e.Cell.Index-1)
 	}
+
+	e.UpdateWatcher()
 
 	err = e.Midget.Update()
 	if err == nil {
@@ -117,14 +186,7 @@ func (e *Editor) Update() error {
 				},
 			)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF):
-			e.Midget.Ask(50, 50, 250, 100, "From", e.Map.From,
-				func(name string) bool {
-					err := e.Map.LoadSurface(name)
-					e.Error = err
-					e.Midget.Error(70, 70, 270, 120, err)
-					return e.Error == nil
-				},
-			)
+			e.Midget.Ask(50, 50, 250, 100, "From", e.Map.From, e.LoadSurface)
 		case inpututil.IsKeyJustPressed(ebiten.KeyP):
 			e.Midget.AskString(50, 50, 250, 100, "Prefix", &e.Map.Prefix)
 		case inpututil.IsKeyJustPressed(ebiten.KeyO):
@@ -132,15 +194,7 @@ func (e *Editor) Update() error {
 		case inpututil.IsKeyJustPressed(ebiten.KeyS):
 			e.Midget.AskInt(50, 50, 250, 100, "UI Scale", &e.Scale)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF3):
-			e.Midget.Tile(200, 100, e.Map.Surface, func(x, y int) {
-				_, h := e.Map.Surface.Size()
-				idx := x + y*(h/e.Map.Th)
-				if idx > 255 {
-					idx -= 255
-					e.Cell.Flag |= FlagExtended
-				}
-				e.Cell.Index = byte(max(0, idx))
-			})
+			e.Midget.Tile(200, 100, e.Map.Surface, e.TileSelected)
 		case ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft):
 			e.Map.Put(e.Tile, e.Cell)
 		default:
@@ -158,10 +212,15 @@ func (e *Editor) Update() error {
 }
 
 func NewEditor(tm *Map, name string, w, h, scale int) *Editor {
+
 	e := &Editor{Map: tm, Name: name, Camera: image.Rect(0, 0, w, h),
 		Scale:  scale,
 		Midget: MakeMidget(image.Rect(0, 0, 0, 0)),
 	}
 	e.Midget.Lock = true
+	if tm.From != "" {
+		e.TileWatcher = Watch(tm.From)
+	}
+
 	return e
 }
