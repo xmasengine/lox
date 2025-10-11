@@ -1,4 +1,4 @@
-package main
+package masite
 
 import "github.com/hajimehoshi/ebiten/v2"
 import "io/fs"
@@ -176,4 +176,47 @@ func Watch(name string) *Watcher {
 		}
 	}()
 	return watcher
+}
+
+// Backups a file to temp files and allows restoring it.
+type Backup struct {
+	Files   []*os.File
+	Ticks   int
+	Pattern string
+}
+
+func (u *Backup) CommitEvery(cb func(f *os.File) error, t int) error {
+	u.Ticks++
+	if u.Ticks > t {
+		u.Ticks = 0
+		return u.Commit(cb)
+	}
+	return nil
+}
+
+func (u *Backup) Commit(cb func(f *os.File) error) error {
+	file, err := os.CreateTemp(os.TempDir(), u.Pattern)
+	if err != nil {
+		return err
+	}
+	u.Files = append(u.Files, file)
+	defer func() {
+		file.Sync()
+		file.Seek(0, 0)
+	}()
+	return cb(file)
+}
+
+func (u *Backup) Restore(cb func(f *os.File) error) error {
+	if len(u.Files) < 1 {
+		return nil
+	}
+	last := len(u.Files) - 1
+	file := u.Files[last]
+	defer func() {
+		os.Remove(file.Name())
+		file.Close()
+	}()
+	u.Files = u.Files[0:last]
+	return cb(file)
 }

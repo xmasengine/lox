@@ -1,4 +1,4 @@
-package main
+package masite
 
 import "image"
 import "strconv"
@@ -248,6 +248,25 @@ func (a *Asker) Update() error {
 			if done {
 				return Termination
 			}
+		case ebiten.KeyC:
+			if inpututil.KeyPressDuration(ebiten.KeyControlLeft) > 0 ||
+				inpututil.KeyPressDuration(ebiten.KeyControlRight) > 0 {
+				WriteClipboardRunes(a.Buf)
+				a.Midget.Update()
+				return MidgetOK
+			}
+		case ebiten.KeyV:
+			if inpututil.KeyPressDuration(ebiten.KeyControlLeft) > 0 ||
+				inpututil.KeyPressDuration(ebiten.KeyControlRight) > 0 {
+				clip := ReadClipboardRunes()
+				if len(clip) > 0 {
+					a.Buf = append(a.Buf, clip...)
+					a.Cursor += len(clip)
+					a.Midget.Update()
+					return MidgetOK
+				}
+			}
+
 		case ebiten.KeyEnd:
 			a.Cursor = len(a.Buf)
 		case ebiten.KeyHome:
@@ -374,6 +393,20 @@ func (m *Midget) AskFlag(x, y, w, h int, prompt string, i *Flag) *Asker {
 		}
 	}
 	return m.Ask(x, y, w, h, prompt, strconv.Itoa(int(*i)), on)
+}
+
+func (m *Midget) AskText(x, y, w, h int, prompt string, t TextEncoding) *Asker {
+	on := func(sres string) bool {
+		err := t.UnmarshalText([]byte(sres))
+		if err == nil {
+			return true
+		} else {
+			m.Error(x+20, y+20, w, h, err)
+			return false
+		}
+	}
+	enc, _ := t.MarshalText()
+	return m.Ask(x, y, w, h, prompt, string(enc), on)
 }
 
 type Tiler struct {

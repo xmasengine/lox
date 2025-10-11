@@ -1,0 +1,22 @@
+GIMP Palette
+Name: sms_pico-8
+Columns: 16
+# A palette inspired by pico8 by Lexaloffle Games and ported to the SMS.
+# The order was changed to it follows the colors of the original SMS palette.
+# One gray was sacrified as the SMS can only have 4 gray levels anyway.
+ 11	 33	 22	Clear
+  0	  0	  0	Black
+  0	170	 85	Green
+  0	255	 85	Lime
+  0	  0	 85	Navy
+  0	170	255	Sky
+170	 85	  0	Brown
+255	  0	 85	Red
+255	170	  0	Orange
+255	255	  0	Yellow
+255	170	170	Pink
+255	255	170	Skin
+170	  0	 85	Purple
+ 85	 85	 85	Gray
+170	170	170	Silver
+255	255	255	White

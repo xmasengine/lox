@@ -1,8 +1,9 @@
-package main
+package masite
 
 import (
 	"fmt"
 	"image"
+	"os"
 )
 
 import (
@@ -24,6 +25,7 @@ type Editor struct {
 	Midget       Midget // Child mini widgets
 	TileWatcher  *Watcher
 	MessageTicks int
+	Backup
 }
 
 func (e Editor) Draw(screen *ebiten.Image) {
@@ -36,18 +38,19 @@ func (e Editor) Draw(screen *ebiten.Image) {
 		}
 	}
 
-	kl := len(e.Midget.Kids)
+	y := 10
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("%s: (%d,%d): %d %s",
+		e.Name, e.Hover.X, e.Hover.Y, e.Cell.Index, e.Cell.Flag), e.Map.Width*e.Map.Tw, y)
+	y += 12
 	if e.Error != nil {
+		kl := len(e.Midget.Kids)
 		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Error: %s [%d]", e.Error, kl),
-			e.Map.Width*e.Map.Tw, 10,
-		)
-	} else {
-		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("%s: (%d,%d): %d %d [%d]",
-			e.Name, e.Hover.X, e.Hover.Y, e.Cell.Index, e.Cell.Flag, kl,
-		), e.Map.Width*e.Map.Tw, 10)
+			e.Map.Width*e.Map.Tw, y)
+		y += 12
 	}
 	if e.Message != "" {
-		ebitenutil.DebugPrintAt(screen, e.Message, e.Map.Width*e.Map.Tw, 20)
+		ebitenutil.DebugPrintAt(screen, e.Message, e.Map.Width*e.Map.Tw, y)
+		y += 12
 	}
 	e.Midget.Draw(screen)
 }
@@ -83,11 +86,17 @@ func (e *Editor) LoadSurface(name string) bool {
 	return e.Error == nil
 }
 
+func (e *Editor) ShowMessage(msg string, args ...any) {
+	e.Message = fmt.Sprintf(msg, args...)
+	e.MessageTicks = 60 * 15
+}
+
 func (e *Editor) UpdateWatcher() bool {
 	if e.MessageTicks > 0 {
 		e.MessageTicks--
 	} else {
 		e.Message = ""
+		e.Error = nil
 	}
 	if e.TileWatcher == nil {
 		return false
@@ -98,8 +107,7 @@ func (e *Editor) UpdateWatcher() bool {
 		e.Error = err
 		e.Midget.Error(70, 70, 270, 120, err)
 		if e.Error == nil {
-			e.Message = "Auto update tiles: " + name
-			e.MessageTicks = 60 * 15
+			e.ShowMessage("Auto update tiles: %s", name)
 			e.UpdateTilers()
 		}
 		return e.Error == nil
@@ -118,15 +126,95 @@ func (e *Editor) TileSelected(x, y int) {
 	e.Cell.Index = byte(max(0, idx))
 }
 
+func (e *Editor) SaveMap(name string) bool {
+	err := e.Map.Save(name)
+	e.Error = err
+	e.Midget.Error(70, 70, 270, 120, err)
+	if e.Error == nil {
+		e.Name = name
+		e.ShowMessage("Map saved to %s", name)
+		return true
+	}
+	return false
+}
+
+func (e *Editor) ExportBasic() bool {
+	name := e.Name + ".bas"
+	err := e.Map.Save(name)
+	e.Error = err
+	e.Midget.Error(70, 70, 270, 120, err)
+	if e.Error == nil {
+		e.Name = name
+		e.ShowMessage("Exported to %s", name)
+		return true
+	}
+	return false
+}
+
+func (e *Editor) SaveMapToFile(f *os.File) error {
+	err := e.Map.SaveToFile(f)
+	e.Error = err
+	if e.Error == nil {
+		e.ShowMessage("Map backed up to %s", f.Name())
+		return nil
+	}
+	return err
+}
+
+func (e *Editor) LoadMapFromFile(f *os.File) error {
+	m, err := LoadMapFromFile(f)
+	e.Error = err
+	if e.Error == nil {
+		e.Map = m
+		e.UpdateTilers()
+		e.ShowMessage("Map restored from %s", f.Name())
+		return nil
+	}
+	return err
+}
+
+func (e *Editor) LoadMap(name string) bool {
+	m, err := LoadMap(name)
+	e.Error = err
+	e.Midget.Error(70, 70, 270, 120, err)
+	if e.Error == nil {
+		e.Map = m
+		e.UpdateTilers()
+		e.ShowMessage("Map loaded from %s", name)
+		e.Name = name
+		return true
+	}
+	return false
+}
+
+func (e *Editor) Restore(doit bool) {
+	if doit {
+		e.Backup.Restore(e.LoadMapFromFile)
+	}
+}
+
+func (e *Editor) SetDone(done bool) {
+	e.Midget.Done = done
+}
+
+func (e Editor) FloodFill(at Point, cell Cell) {
+	e.Map.FloodFill(at, cell)
+}
+
 const HELP = `HELP
 Mouse: Draw, select, drag pop up panes.
-Pause: Exit witout saving.
-F1: This help.
-F2: Save map in mashite format.
-F3: Show tile image, can click to select.
 Mouse Wheel: Select tile index.
+Left Shift+Click: Draw image.
+Left Control+Click: Draw flag.
+Left Control+Alt: Flood fill.
+Pause: Exit without saving.
+F1: This help.
+F2: Save map. F5: Export as basic.
+F3: Show tile image, can click to select.
+F4: Load map from named file.
+F : Load tile image. M : Toggle flag mode.
 H, V: Horizontal and Vertical flip
-Y: copy hovered tile
+Y: copy hovered tile. G: Flags.
 Enter: Confirm dialogs.
 Esc: Cancel dialogs.
 `
@@ -150,14 +238,15 @@ func (e *Editor) Update() error {
 		switch {
 		case inpututil.IsKeyJustPressed(ebiten.KeyPause):
 			if len(e.Midget.Kids) < 1 {
-				e.Midget.YesNo(50, 50, 250, 100, "Quit", "Y",
-					func(resp bool) {
-						e.Midget.Done = resp
-					},
-				)
+				e.Midget.YesNo(50, 50, 250, 100, "Quit", "Y", e.SetDone)
 			}
 		case inpututil.IsKeyJustPressed(ebiten.KeyY):
 			e.Cell = e.Map.Get(e.Tile)
+			e.ShowMessage("Yanked %d %d", e.Cell.Index, e.Cell.Flag)
+		case inpututil.IsKeyJustPressed(ebiten.KeyL):
+			if e.Map != nil {
+				e.Map.Flags = !e.Map.Flags
+			}
 		case inpututil.IsKeyJustPressed(ebiten.KeyH):
 			e.Cell.Flag ^= FlagHorizontalFlip
 		case inpututil.IsKeyJustPressed(ebiten.KeyV):
@@ -167,24 +256,19 @@ func (e *Editor) Update() error {
 		case inpututil.IsKeyJustPressed(ebiten.KeyB):
 			e.Cell.Flag ^= FlagSolid
 		case inpututil.IsKeyJustPressed(ebiten.KeyG):
-			e.Midget.AskFlag(50, 50, 250, 100, "Flag", &e.Cell.Flag)
-		case inpututil.IsKeyJustPressed(ebiten.KeyF10):
-			e.Error = nil
+			e.Midget.AskText(50, 50, 250, 100, "Flag", &e.Cell.Flag)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF1):
-			e.Midget.Ask(100, 0, 250, 200, HELP, "", Accept)
+			e.Midget.Ask(50, 0, 300, 250, HELP, "", Accept)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF2):
-			e.Midget.Ask(50, 50, 250, 100, "Save As", e.Name,
-				func(name string) bool {
-					err := e.Map.Save(name)
-					e.Error = err
-					e.Midget.Error(70, 70, 270, 120, err)
-					if e.Error == nil {
-						e.Name = name
-						return true
-					}
-					return false
-				},
-			)
+			e.Midget.Ask(50, 50, 250, 100, "Save As", e.Name, e.SaveMap)
+		case inpututil.IsKeyJustPressed(ebiten.KeyF4):
+			e.Midget.Ask(50, 50, 250, 100, "Load From", e.Name, e.LoadMap)
+		case inpututil.IsKeyJustPressed(ebiten.KeyU):
+			if inpututil.KeyPressDuration(ebiten.KeyShiftLeft) > 0 {
+				e.Backup.Commit(e.SaveMapToFile)
+			} else {
+				e.Midget.YesNo(50, 50, 250, 100, "Restore backup", "Y", e.Restore)
+			}
 		case inpututil.IsKeyJustPressed(ebiten.KeyF):
 			e.Midget.Ask(50, 50, 250, 100, "From", e.Map.From, e.LoadSurface)
 		case inpututil.IsKeyJustPressed(ebiten.KeyP):
@@ -195,8 +279,27 @@ func (e *Editor) Update() error {
 			e.Midget.AskInt(50, 50, 250, 100, "UI Scale", &e.Scale)
 		case inpututil.IsKeyJustPressed(ebiten.KeyF3):
 			e.Midget.Tile(200, 100, e.Map.Surface, e.TileSelected)
+		case inpututil.IsKeyJustPressed(ebiten.KeyF5):
+			e.ExportBasic()
 		case ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft):
-			e.Map.Put(e.Tile, e.Cell)
+			if inpututil.KeyPressDuration(ebiten.KeyShiftLeft) > 0 {
+				e.Map.PutIndex(e.Tile, e.Cell.Index)
+			} else if inpututil.KeyPressDuration(ebiten.KeyControlLeft) > 0 || e.Map.Flags {
+				e.Map.PutFlag(e.Tile, e.Cell.Flag)
+			} else if inpututil.KeyPressDuration(ebiten.KeyAltLeft) > 0 {
+				e.Map.FloodFill(e.Tile, e.Cell)
+			} else {
+				e.Map.Put(e.Tile, e.Cell)
+			}
+		case ebiten.IsMouseButtonPressed(ebiten.MouseButtonRight):
+			if inpututil.KeyPressDuration(ebiten.KeyShiftLeft) > 0 {
+				e.Map.PutIndex(e.Tile, 0)
+			} else if inpututil.KeyPressDuration(ebiten.KeyControlLeft) > 0 || e.Map.Flags {
+				e.Map.PutFlag(e.Tile, 0)
+			} else {
+				zero := Cell{}
+				e.Map.Put(e.Tile, zero)
+			}
 		default:
 		}
 	} else {
@@ -221,6 +324,7 @@ func NewEditor(tm *Map, name string, w, h, scale int) *Editor {
 	if tm.From != "" {
 		e.TileWatcher = Watch(tm.From)
 	}
+	e.Backup.Pattern = "masite*.xml"
 
 	return e
 }

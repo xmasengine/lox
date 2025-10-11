@@ -11,6 +11,7 @@ import (
 	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/xmasengine/lox/masite"
 )
 
 func errExit(err error) {
@@ -35,20 +36,20 @@ func main() {
 
 	flag.Parse()
 
-	var tm *Map
+	var tm *masite.Map
 
 	if from != "" {
-		tm, err = NewMap(w, h, from)
+		tm, err = masite.NewMap(w, h, from)
 		errExit(err)
 	} else {
-		tm, err = LoadMap(name)
+		tm, err = masite.LoadMap(name)
 		errExit(err)
 	}
 
 	sw, sh := ebiten.Monitor().Size()
 	ebiten.SetWindowSize(sw, sh)
 	ebiten.SetWindowTitle("mashite")
-	edit := NewEditor(tm, name, sw, sh, scale)
+	edit := masite.NewEditor(tm, name, sw, sh, scale)
 	if err := ebiten.RunGame(edit); err != nil {
 		fmt.Printf("error: %s", err)
 		os.Exit(1)

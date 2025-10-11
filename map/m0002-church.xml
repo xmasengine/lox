@@ -1,4 +1,4 @@
-<Map width="24" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0001church">
+<map width="24" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0001church">
     <rows>
         <cells index="23" flag="0"></cells>
         <cells index="23" flag="0"></cells>
@@ -6,15 +6,15 @@
         <cells index="23" flag="0"></cells>
         <cells index="23" flag="0"></cells>
         <cells index="23" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
         <cells index="23" flag="0"></cells>
         <cells index="23" flag="0"></cells>
         <cells index="23" flag="0"></cells>
@@ -32,15 +32,15 @@
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
-        <cells index="17" flag="0"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="3" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="7" flag="0"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
+        <cells index="16" flag="0"></cells>
+        <cells index="16" flag="0"></cells>
         <cells index="3" flag="0"></cells>
-        <cells index="17" flag="2"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
@@ -58,7 +58,7 @@
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
-        <cells index="17" flag="0"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="2" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="7" flag="0"></cells>
@@ -66,7 +66,7 @@
         <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="2" flag="0"></cells>
-        <cells index="17" flag="2"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
@@ -78,114 +78,114 @@
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="4" flag="2"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="3" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
         <cells index="3" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="3" flag="0"></cells>
-        <cells index="16" flag="2"></cells>
+        <cells index="16" flag="0"></cells>
         <cells index="15" flag="0"></cells>
         <cells index="33" flag="0"></cells>
         <cells index="15" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="3" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="3" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="3" flag="34"></cells>
+        <cells index="4" flag="32"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="2" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="33" flag="0"></cells>
-        <cells index="30" flag="0"></cells>
-        <cells index="33" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="33" flag="34"></cells>
+        <cells index="30" flag="34"></cells>
+        <cells index="33" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="16" flag="0"></cells>
+        <cells index="7" flag="0"></cells>
+        <cells index="16" flag="0"></cells>
+        <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="7" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="7" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
         <cells index="2" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="2" flag="0"></cells>
-        <cells index="16" flag="2"></cells>
+        <cells index="16" flag="0"></cells>
         <cells index="15" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="15" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="16" flag="0"></cells>
+        <cells index="15" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="15" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="15" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
+        <cells index="15" flag="0"></cells>
+        <cells index="16" flag="0"></cells>
         <cells index="2" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
+        <cells index="17" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="10" flag="4"></cells>
         <cells index="11" flag="6"></cells>
         <cells index="10" flag="6"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="33" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="33" flag="0"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="33" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="33" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="2"></cells>
-        <cells index="6" flag="0"></cells>
-        <cells index="6" flag="0"></cells>
+        <cells index="6" flag="16"></cells>
+        <cells index="6" flag="16"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -199,19 +199,19 @@
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="6" flag="0"></cells>
-        <cells index="6" flag="0"></cells>
+        <cells index="6" flag="16"></cells>
+        <cells index="6" flag="16"></cells>
         <cells index="30" flag="2"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="21" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="8" flag="0"></cells>
-        <cells index="8" flag="2"></cells>
+        <cells index="8" flag="34"></cells>
+        <cells index="8" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -225,16 +225,16 @@
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="8" flag="0"></cells>
-        <cells index="8" flag="2"></cells>
+        <cells index="8" flag="34"></cells>
+        <cells index="8" flag="34"></cells>
         <cells index="26" flag="6"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="21" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -243,9 +243,9 @@
         <cells index="30" flag="0"></cells>
         <cells index="20" flag="0"></cells>
         <cells index="12" flag="0"></cells>
-        <cells index="8" flag="0"></cells>
-        <cells index="9" flag="0"></cells>
-        <cells index="8" flag="2"></cells>
+        <cells index="8" flag="34"></cells>
+        <cells index="9" flag="34"></cells>
+        <cells index="8" flag="34"></cells>
         <cells index="12" flag="0"></cells>
         <cells index="20" flag="2"></cells>
         <cells index="30" flag="0"></cells>
@@ -254,17 +254,17 @@
         <cells index="30" flag="0"></cells>
         <cells index="25" flag="0"></cells>
         <cells index="26" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="6"></cells>
         <cells index="22" flag="4"></cells>
         <cells index="21" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="10" flag="0"></cells>
@@ -276,17 +276,17 @@
         <cells index="10" flag="2"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="26" flag="6"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="6"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -306,19 +306,19 @@
         <cells index="30" flag="0"></cells>
         <cells index="25" flag="0"></cells>
         <cells index="26" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="6"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="20" flag="0"></cells>
@@ -326,19 +326,19 @@
         <cells index="20" flag="2"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="26" flag="6"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="6"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -358,19 +358,19 @@
         <cells index="30" flag="0"></cells>
         <cells index="25" flag="0"></cells>
         <cells index="26" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="6"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="20" flag="0"></cells>
@@ -378,19 +378,19 @@
         <cells index="20" flag="2"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="26" flag="6"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -410,19 +410,19 @@
         <cells index="30" flag="0"></cells>
         <cells index="25" flag="0"></cells>
         <cells index="26" flag="0"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="17" flag="4"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="14" flag="0"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="10" flag="0"></cells>
@@ -430,19 +430,19 @@
         <cells index="10" flag="2"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="13" flag="0"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="14" flag="2"></cells>
-        <cells index="13" flag="2"></cells>
+        <cells index="13" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="14" flag="34"></cells>
+        <cells index="13" flag="34"></cells>
         <cells index="26" flag="6"></cells>
-        <cells index="17" flag="6"></cells>
+        <cells index="17" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="3" flag="0"></cells>
+        <cells index="3" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -450,11 +450,11 @@
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="3" flag="0"></cells>
+        <cells index="3" flag="16"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="3" flag="0"></cells>
+        <cells index="3" flag="16"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
@@ -462,111 +462,111 @@
         <cells index="30" flag="0"></cells>
         <cells index="25" flag="0"></cells>
         <cells index="26" flag="0"></cells>
-        <cells index="3" flag="0"></cells>
+        <cells index="3" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="22" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="2" flag="0"></cells>
-        <cells index="3" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="3" flag="2"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="3" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="3" flag="34"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="3" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="3" flag="0"></cells>
-        <cells index="2" flag="4"></cells>
-        <cells index="22" flag="2"></cells>
-        <cells index="22" flag="0"></cells>
-        <cells index="0" flag="0"></cells>
-    </rows>
-    <rows>
-        <cells index="2" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="7" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="7" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="30" flag="0"></cells>
-        <cells index="30" flag="0"></cells>
-        <cells index="30" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="7" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="7" flag="2"></cells>
-        <cells index="16" flag="2"></cells>
-        <cells index="2" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="3" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="3" flag="34"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="2" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="15" flag="2"></cells>
+        <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="15" flag="2"></cells>
+        <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="2" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="2" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="15" flag="2"></cells>
+        <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
-        <cells index="15" flag="2"></cells>
+        <cells index="7" flag="0"></cells>
         <cells index="16" flag="2"></cells>
         <cells index="2" flag="0"></cells>
-        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
     <rows>
-        <cells index="1" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="2" flag="0"></cells>
+        <cells index="16" flag="2"></cells>
+        <cells index="15" flag="0"></cells>
+        <cells index="16" flag="2"></cells>
+        <cells index="15" flag="0"></cells>
+        <cells index="16" flag="2"></cells>
+        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
         <cells index="30" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="2"></cells>
-        <cells index="4" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
-        <cells index="1" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="2" flag="0"></cells>
+        <cells index="16" flag="2"></cells>
+        <cells index="15" flag="0"></cells>
+        <cells index="16" flag="2"></cells>
+        <cells index="15" flag="0"></cells>
+        <cells index="16" flag="2"></cells>
+        <cells index="2" flag="0"></cells>
+        <cells index="2" flag="34"></cells>
+        <cells index="22" flag="2"></cells>
+        <cells index="22" flag="0"></cells>
+        <cells index="0" flag="0"></cells>
+    </rows>
+    <rows>
+        <cells index="1" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="30" flag="0"></cells>
+        <cells index="30" flag="0"></cells>
+        <cells index="30" flag="0"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="4" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
+        <cells index="1" flag="34"></cells>
         <cells index="22" flag="2"></cells>
         <cells index="22" flag="0"></cells>
         <cells index="0" flag="0"></cells>
@@ -623,4 +623,4 @@
         <cells index="0" flag="0"></cells>
         <cells index="0" flag="0"></cells>
     </rows>
-</Map>
+</map>
