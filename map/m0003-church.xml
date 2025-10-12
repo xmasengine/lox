@@ -1,4 +1,4 @@
-<map width="24" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0001church">
+<map width="24" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0003church">
     <rows>
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>

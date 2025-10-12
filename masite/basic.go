@@ -90,12 +90,15 @@ func BitmapToBasic(out io.Writer, bitmap image.PalettedImage, pre string, cw, ch
 }
 
 func (m *Map) Basic(out io.Writer) error {
-	fmt.Fprintf(out, "' Generated with res2bas\n\n")
+	fmt.Fprintf(out, "' Generated with masite\n\n")
 	fmt.Fprintf(out, "' Screen for tile map %s, offset: %d\n", m.Prefix, m.Offset)
 	fmt.Fprintf(out, "%s_map: \n", m.Prefix)
 	for y := 0; y < 24; y++ {
 		fmt.Fprintf(out, "DATA BYTE ")
 		for x := 0; x < 32; x++ {
+			if x > 0 {
+				fmt.Fprintf(out, ",")
+			}
 			cell := m.Get(image.Pt(x, y))
 			fmt.Fprintf(out, "$%02x,$%02x", cell.Index, cell.Flag)
 		}
@@ -121,7 +124,7 @@ type Basicer interface {
 func MarshalBasic(ptr any) ([]byte, error) {
 	basicer, ok := ptr.(Basicer)
 	if !ok {
-		return nil, errors.New("Can only mashal a Basicer to basic")
+		return nil, errors.New("Can only marshal a Basicer to basic")
 	}
 	writer := &bytes.Buffer{}
 	if err := basicer.Basic(writer); err != nil {

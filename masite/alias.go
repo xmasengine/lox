@@ -30,11 +30,26 @@ type TextEncoding interface {
 var (
 	Termination = ebiten.Termination
 	MidgetOK    = errors.New("OK")
+	MidgetTOP   = errors.New("TOP")
 )
 
 func errExit(err error) {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
 		os.Exit(1)
+	}
+}
+
+var lastPrintd string
+
+func printd(args ...any) {
+	msg := fmt.Sprint(args...)
+
+	if msg != lastPrintd {
+		fmt.Println()
+		fmt.Print(msg)
+		lastPrintd = msg
+	} else {
+		fmt.Printf("\x08%s", "♥")
 	}
 }
