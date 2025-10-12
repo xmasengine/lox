@@ -21,6 +21,12 @@ import (
 // Format is just the lowercase extension including the '.' prefix.
 type Format string
 
+const (
+	JSONFormat   Format = ".json"
+	MasiteFormat Format = ".xml"
+	BasicFormat  Format = ".bas"
+)
+
 func (f Format) Unmarshal(buf []byte, ptr any) error {
 	switch f {
 	case ".json", ".js", ".masite":
@@ -297,6 +303,24 @@ func (m *Map) Save(to string) error {
 
 func (m *Map) SaveToFile(f *os.File) error {
 	buf, err := FormatFor(f.Name()).Marshal(m)
+	if err != nil {
+		return err
+	}
+	_, err = f.Write(buf)
+	return err
+}
+
+func (m *Map) Export(to string, form Format) error {
+	f, err := os.Create(to)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return m.ExportToFile(f, form)
+}
+
+func (m *Map) ExportToFile(f *os.File, form Format) error {
+	buf, err := form.Marshal(m)
 	if err != nil {
 		return err
 	}

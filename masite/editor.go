@@ -140,11 +140,10 @@ func (e *Editor) SaveMap(name string) bool {
 
 func (e *Editor) ExportBasic() bool {
 	name := e.Name + ".bas"
-	err := e.Map.Save(name)
+	err := e.Map.Export(name, BasicFormat)
 	e.Error = err
 	e.Midget.Error(70, 70, 270, 120, err)
 	if e.Error == nil {
-		e.Name = name
 		e.ShowMessage("Exported to %s", name)
 		return true
 	}
@@ -207,16 +206,14 @@ Mouse Wheel: Select tile index.
 Left Shift+Click: Draw image.
 Left Control+Click: Draw flag.
 Left Control+Alt: Flood fill.
-Pause: Exit without saving.
-F1: This help.
-F2: Save map. F5: Export as basic.
-F3: Show tile image, can click to select.
-F4: Load map from named file.
-F : Load tile image. M : Toggle flag mode.
-H, V: Horizontal and Vertical flip
-Y: copy hovered tile. G: Flags.
-Enter: Confirm dialogs.
-Esc: Cancel dialogs.
+Pause: Exit without save.
+F1: This help.          | F2: Save map.
+F3: Show tile selector. | F4: Load map.
+F5: Export as basic.    | P: Edit Prefix.
+F:  Load tile image.    | M: Toggle flag mode.
+H: Horizontal flip      | V: Vertical flip
+Y: Yank hovered tile.   | G: Edit flags.
+Enter: Confirm dialogs. | Esc: Cancel dialogs.
 `
 
 func (e *Editor) Update() error {
@@ -243,9 +240,7 @@ func (e *Editor) Update() error {
 
 	switch {
 	case inpututil.IsKeyJustPressed(ebiten.KeyPause):
-		if len(e.Midget.Kids) < 1 {
-			e.Midget.YesNo(50, 50, 250, 100, "Quit", "Y", e.SetDone)
-		}
+		e.Midget.YesNo(50, 50, 250, 100, "Quit", "Y", e.SetDone)
 	case inpututil.IsKeyJustPressed(ebiten.KeyY):
 		e.Cell = e.Map.Get(e.Tile)
 		e.ShowMessage("Yanked %d %d", e.Cell.Index, e.Cell.Flag)
