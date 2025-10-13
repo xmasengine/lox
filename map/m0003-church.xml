@@ -1,4 +1,4 @@
-<map width="24" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0003church">
+<map width="32" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0003church">
     <rows>
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>
@@ -24,6 +24,14 @@
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="23" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="22" flag=""></cells>
@@ -49,7 +57,15 @@
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="22" flag=""></cells>
@@ -75,7 +91,15 @@
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="4" flag="HS"></cells>
@@ -101,7 +125,15 @@
         <cells index="4" flag="S"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -127,7 +159,15 @@
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag="H"></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -153,7 +193,15 @@
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag="H"></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -179,7 +227,15 @@
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag="H"></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -205,7 +261,15 @@
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
-        <cells index="21" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -231,7 +295,15 @@
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
-        <cells index="21" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -257,7 +329,15 @@
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="HV"></cells>
         <cells index="22" flag="V"></cells>
-        <cells index="21" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -284,6 +364,14 @@
         <cells index="22" flag="HV"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -310,6 +398,14 @@
         <cells index="22" flag="HV"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -334,6 +430,14 @@
         <cells index="26" flag="HV"></cells>
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="HV"></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
     </rows>
@@ -362,6 +466,14 @@
         <cells index="22" flag="HV"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -388,6 +500,14 @@
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="17" flag="HS"></cells>
@@ -412,6 +532,14 @@
         <cells index="26" flag=""></cells>
         <cells index="17" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
     </rows>
@@ -440,6 +568,14 @@
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="3" flag="HS"></cells>
@@ -466,6 +602,14 @@
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="2" flag="HS"></cells>
@@ -491,7 +635,15 @@
         <cells index="2" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="2" flag="HS"></cells>
@@ -517,7 +669,15 @@
         <cells index="2" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="2" flag="HS"></cells>
@@ -543,7 +703,15 @@
         <cells index="2" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="1" flag="HS"></cells>
@@ -569,7 +737,15 @@
         <cells index="1" flag="HS"></cells>
         <cells index="22" flag="H"></cells>
         <cells index="22" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="30" flag=""></cells>
@@ -595,32 +771,48 @@
         <cells index="30" flag=""></cells>
         <cells index="30" flag=""></cells>
         <cells index="30" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="30" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
     <rows>
         <cells index="22" flag=""></cells>
         <cells index="0" flag=""></cells>
         <cells index="18" flag=""></cells>
         <cells index="18" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
-        <cells index="0" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
+        <cells index="22" flag=""></cells>
     </rows>
 </map>

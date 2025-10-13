@@ -29,7 +29,7 @@ func main() {
 	h := 24
 	scale := 2
 	flag.StringVar(&name, "m", "", "map input file name")
-	flag.IntVar(&w, "w", h, "map width for new map")
+	flag.IntVar(&w, "w", w, "map width for new map")
 	flag.IntVar(&h, "h", h, "map height for new map")
 	flag.IntVar(&scale, "S", scale, "ui scale factor")
 	flag.StringVar(&from, "f", "", "tile source for new map")
