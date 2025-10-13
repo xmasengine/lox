@@ -54,14 +54,14 @@ func (f Format) Marshal(ptr any) ([]byte, error) {
 type Flag byte
 
 const (
-	FlagExtended       Flag = 1
-	FlagHorizontalFlip Flag = 2
-	FlagVerticalFlip   Flag = 4
-	FlagSpritePalette  Flag = 8
-	FlagOnTop          Flag = 16
-	FlagSolid          Flag = 32
-	FlagBless          Flag = 64
-	FlagHarm           Flag = 128
+	FlagExtended       Flag = 1 << 0
+	FlagHorizontalFlip Flag = 1 << 1
+	FlagVerticalFlip   Flag = 1 << 2
+	FlagSpritePalette  Flag = 1 << 3
+	FlagOnTop          Flag = 1 << 4
+	FlagSolid          Flag = 1 << 5
+	FlagBless          Flag = 1 << 6
+	FlagHarm           Flag = 1 << 7
 )
 
 func (f Flag) Is(s Flag) bool {

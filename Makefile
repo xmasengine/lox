@@ -6,6 +6,7 @@ BLIB = $(HOME)/opt/nanochess/CVBasic
 ASM = gasm80
 ASMFLAGS = -sms
 EMU=mg -scale 5
+EMU2=gearsystem
 DEPS=nun.bas sprite1.bas tile2.bas map1.bas
 
 build: build/lox.sms
@@ -23,7 +24,10 @@ build/lox.asm: lox.bas $(DEPS)
 run: build/lox.sms
 	@$(EMU) build/lox.sms
 
+gs: build/lox.sms
+	@$(EMU2) build/lox.sms
+
 clean:
 	@rm build/lox.asm build/lox.sms
 
-.PHONY: run clean build
+.PHONY: run clean build gs

@@ -72,12 +72,16 @@ DIM player_sprite_x
 DIM player_sprite_y
 DIM player_sprite_f
 DIM player_sprite_d
+DIM player_sprite_m
 
+CONST BORDER_LEFT_ON=1
+CONST BORDER_NO_SCROLL_LEFT=2
+CONST BORDER_NO_SCROLL_BOTTOM=2
 
 start:
 ' Set up screen
 	MODE 4
-	BORDER 12
+	BORDER 0, BORDER_NO_SCROLL_BOTTOM + BORDER_LEFT_ON
 	SPRITE FLICKER OFF
 	CLS
 
@@ -89,6 +93,21 @@ start:
 	BANK SELECT 0
 	PRINT_XY(10, 4,"Lord Of Xmas")
 	PRINT_XY(6, 5,"By xmasengine, 2025")
+	PRINT_XY(6, 6,"Press a button")
+
+' Wait for button press
+	WHILE CONT.BUTTON = 0 AND CONT.BUTTON2 =0
+	WEND
+
+' Load tile map: select bank, load CHAR bitmaps, load map as screen
+	BANK SELECT MAP_BANK_3
+	DEFINE CHAR 0,32,m0003church_bitmap
+' Should not need parameters as a single map is a single screen for now
+	SCREEN m0003church_map
+' Palette is loaded though a gosub
+	GOSUB m0003church_palette
+' Debug
+	PRINT_XY(1, 23, "Map Loaded")
 ' Display player sprite
 	player_sprite_x = 150
 	player_sprite_y = 40
@@ -98,32 +117,38 @@ start:
 	GOSUB sprite_palette
 	DEFINE SPRITE SPRITE_PLAYER,64,sprite_bitmap
 	SPRITE SPRITE_PLAYER,player_sprite_y,player_sprite_x,player_sprite_f
+	WAIT
+
 	BANK SELECT MAIN_BANK
 	WHILE 1
+		player_sprite_m = 1
 		IF CONT1.UP THEN
 			player_sprite_y = player_sprite_y - 1
 			player_sprite_d = FRAME_N
+			player_sprite_m = 1
 		ELSEIF CONT1.DOWN THEN
 			player_sprite_y = player_sprite_y + 1
 			player_sprite_d = FRAME_S
+			player_sprite_m = 1
 		ELSEIF CONT1.LEFT THEN
 			player_sprite_x = player_sprite_x - 1
 			player_sprite_d = FRAME_W
+			player_sprite_m = 1
 		ELSEIF CONT1.RIGHT THEN
 			player_sprite_x = player_sprite_x + 1
 			player_sprite_d = FRAME_E
+			player_sprite_m = 1
 		ELSEIF CONT1.BUTTON > 0 THEN
-			BANK SELECT MAP_BANK_1
-			DEFINE CHAR 128,64,map1_bitmap
-			gosub map1_palette
-			BANK SELECT MAIN_BANK
+			player_sprite_m = 1
 		ELSEIF CONT1.BUTTON2 > 0 THEN
-			BANK SELECT MAP_BANK_1
-			SCREEN map1_map
-			BANK SELECT MAIN_BANK
+			player_sprite_m = 1
+		ELSE
+			player_sprite_m = 0
 		END IF
-		IF (FRAME % 15) = 0 THEN player_sprite_f = player_sprite_f + 2
-		IF player_sprite_f > 3 THEN player_sprite_f = 0
+		IF player_sprite_m > 0 THEN
+			IF (FRAME % 15) = 0 THEN player_sprite_f = player_sprite_f + 2
+			IF player_sprite_f > 3 THEN player_sprite_f = 0
+		END IF
 		SPRITE SPRITE_PLAYER, player_sprite_y,player_sprite_x,player_sprite_f+player_sprite_d
 		WAIT
 	WEND
@@ -142,3 +167,6 @@ done: GOTO done
 	INCLUDE "nun.bas"
 	BANK MAP_BANK_1
 	INCLUDE "map1.bas"
+    BANK MAP_BANK_3
+    INCLUDE "./map/m0003-church.xml.bas"
+

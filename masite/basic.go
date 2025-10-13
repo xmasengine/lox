@@ -29,8 +29,9 @@ func PaletteToBasic(out io.Writer, bitmap image.PalettedImage, pre string, poff 
 	fmt.Fprintf(out, "%s_palette: PROCEDURE\n", pre)
 	for pidx, entry := range palette {
 		pr, pg, pb, pa := entry.RGBA()
-		fmt.Fprintf(out, "' palette entry %d: %0x,%0x,%0x,%0x\n", pidx, pr, pg, pb, pa)
-		fmt.Fprintf(out, "\tPALETTE %d,$%02x\n", poff+pidx, col2b(entry))
+		bcol := col2b(entry)
+		fmt.Fprintf(out, "' palette entry %d: %0x,%0x,%0x,%0x (%b)\n", pidx, pr, pg, pb, pa, bcol)
+		fmt.Fprintf(out, "\tPALETTE %d,$%02x\n", poff+pidx, bcol)
 	}
 	fmt.Fprintf(out, "END\n\n")
 	return nil
@@ -47,7 +48,10 @@ func ImageToBasic(out io.Writer, bitmap image.PalettedImage, pre string, cw, ch,
 	for cy := 0; cy < bh; cy += ch {
 		for cx := 0; cx < bw; cx += cw {
 			if !IsBitmapEmpty(bitmap, cw, ch, cx, cy) {
-				BitmapToBasic(out, bitmap, pre, cw, ch, cx, cy)
+				err := BitmapToBasic(out, bitmap, pre, cw, ch, cx, cy)
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}
@@ -59,7 +63,7 @@ func IsBitmapEmpty(bitmap image.PalettedImage, cw, ch, cx, cy int) bool {
 		for x := cx; x < cx+cw; x++ {
 			idx := bitmap.ColorIndexAt(x, y)
 			if idx > 16 {
-				errExit(fmt.Errorf("Color out of range at (%d, %d): %s", x, y, idx))
+				errExit(fmt.Errorf("Color out of range at (%d, %d): %d", x, y, idx))
 			}
 			if idx != 0 {
 				return false
@@ -76,7 +80,7 @@ func BitmapToBasic(out io.Writer, bitmap image.PalettedImage, pre string, cw, ch
 		for x := cx; x < cx+cw; x++ {
 			idx := bitmap.ColorIndexAt(x, y)
 			if idx > 15 {
-				errExit(fmt.Errorf("Color out of range at (%d, %d): %s", x, y, idx))
+				return fmt.Errorf("Color out of range at (%d, %d): %s", x, y, idx)
 			}
 			if idx == 0 {
 				fmt.Fprintf(out, ".")
@@ -89,18 +93,24 @@ func BitmapToBasic(out io.Writer, bitmap image.PalettedImage, pre string, cw, ch
 	return nil
 }
 
+const SMS_SCREEN_TW = 32
+const SMS_SCREEN_TH = 24
+
 func (m *Map) Basic(out io.Writer) error {
 	fmt.Fprintf(out, "' Generated with masite\n\n")
-	fmt.Fprintf(out, "' Screen for tile map %s, offset: %d\n", m.Prefix, m.Offset)
+	fmt.Fprintf(out, "' Screen for tile map %s, offset: %d Size:%dx%d\n", m.Prefix, m.Offset, m.Width, m.Height)
 	fmt.Fprintf(out, "%s_map: \n", m.Prefix)
-	for y := 0; y < 24; y++ {
+	for y := 0; y < SMS_SCREEN_TH; y++ {
 		fmt.Fprintf(out, "DATA BYTE ")
-		for x := 0; x < 32; x++ {
+		for x := 0; x < SMS_SCREEN_TW; x++ {
 			if x > 0 {
 				fmt.Fprintf(out, ",")
 			}
 			cell := m.Get(image.Pt(x, y))
-			fmt.Fprintf(out, "$%02x,$%02x", cell.Index, cell.Flag)
+
+			flag := byte(cell.Flag)
+
+			fmt.Fprintf(out, "$%02x,$%02x", byte(cell.Index), flag)
 		}
 		fmt.Fprintf(out, "\n")
 	}
