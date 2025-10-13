@@ -145,9 +145,9 @@
         <cells index="16" flag="H"></cells>
         <cells index="2" flag="HS"></cells>
         <cells index="4" flag="HS"></cells>
-        <cells index="31" flag=""></cells>
+        <cells index="31" flag="S"></cells>
         <cells index="30" flag="HS"></cells>
-        <cells index="31" flag=""></cells>
+        <cells index="31" flag="S"></cells>
         <cells index="4" flag="HS"></cells>
         <cells index="2" flag="HS"></cells>
         <cells index="16" flag=""></cells>
@@ -207,9 +207,9 @@
         <cells index="17" flag="HS"></cells>
         <cells index="1" flag="HS"></cells>
         <cells index="4" flag="HS"></cells>
-        <cells index="31" flag=""></cells>
+        <cells index="31" flag="S"></cells>
         <cells index="4" flag="HS"></cells>
-        <cells index="31" flag=""></cells>
+        <cells index="31" flag="S"></cells>
         <cells index="4" flag="HS"></cells>
         <cells index="1" flag="HS"></cells>
         <cells index="30" flag=""></cells>
@@ -219,9 +219,9 @@
         <cells index="30" flag=""></cells>
         <cells index="1" flag="HS"></cells>
         <cells index="4" flag="HS"></cells>
-        <cells index="31" flag=""></cells>
+        <cells index="31" flag="S"></cells>
         <cells index="4" flag="HS"></cells>
-        <cells index="31" flag=""></cells>
+        <cells index="31" flag="S"></cells>
         <cells index="4" flag="HS"></cells>
         <cells index="1" flag="HS"></cells>
         <cells index="17" flag="HS"></cells>
@@ -315,9 +315,9 @@
         <cells index="30" flag=""></cells>
         <cells index="20" flag=""></cells>
         <cells index="12" flag=""></cells>
-        <cells index="8" flag="S"></cells>
-        <cells index="9" flag="HS"></cells>
-        <cells index="8" flag="HS"></cells>
+        <cells index="8" flag="SB"></cells>
+        <cells index="9" flag="SB"></cells>
+        <cells index="8" flag="HSB"></cells>
         <cells index="12" flag=""></cells>
         <cells index="20" flag="H"></cells>
         <cells index="30" flag=""></cells>

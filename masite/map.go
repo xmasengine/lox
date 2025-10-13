@@ -60,8 +60,8 @@ const (
 	FlagSpritePalette  Flag = 1 << 3
 	FlagOnTop          Flag = 1 << 4
 	FlagSolid          Flag = 1 << 5
-	FlagBless          Flag = 1 << 6
-	FlagHarm           Flag = 1 << 7
+	FlagHarm           Flag = 1 << 6
+	FlagBless          Flag = 1 << 7
 )
 
 func (f Flag) Is(s Flag) bool {
@@ -245,7 +245,6 @@ func (m *Map) Resize(w, h int) {
 
 	rlen := len(m.Rows)
 	if h > rlen {
-		println("expanded rows")
 		m.Rows = append(m.Rows, make([]Row, h-rlen)...)
 	} else if h < len(m.Rows) {
 		m.Rows = m.Rows[0:h]
@@ -254,13 +253,11 @@ func (m *Map) Resize(w, h int) {
 		row := m.Rows[y]
 		clen := len(row.Cells)
 		if w > clen {
-			println("expanded column", y)
 			row.Cells = append(row.Cells, make([]Cell, w-clen)...)
 		} else if w < len(row.Cells) {
 			row.Cells = row.Cells[0:w]
 		}
 		m.Rows[y] = row
-		println("expanded to", len(m.Rows[y].Cells), w)
 	}
 	m.Width = w
 	m.Height = h

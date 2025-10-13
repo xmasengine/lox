@@ -73,10 +73,30 @@ DIM player_sprite_y
 DIM player_sprite_f
 DIM player_sprite_d
 DIM player_sprite_m
+DIM player_facing_tx
+DIM player_facing_ty
+DIM map_flag_peek
+DIM map_flag_peek_1
+DIM map_flag_peek_2
+
+
 
 CONST BORDER_LEFT_ON=1
 CONST BORDER_NO_SCROLL_LEFT=2
 CONST BORDER_NO_SCROLL_BOTTOM=2
+
+const FLAG_SOLID = 32
+const FLAG_HARM  = 64
+const FLAG_BLESS = 128
+
+CONST #VRAM_TILE_MAP=$3800
+
+' Reads the map flag from video memory.
+' There are 3 extra bits available which Lox uses for collision detection.
+' For a sprite X and Y should be adjusted depending on its size.
+DEF FN MAP_FLAG_AT(X, Y, VAR) = DEFINE VRAM READ #VRAM_TILE_MAP + ((X) / 8 + ((Y) / 8) * 32)*2 + 1, 1, VAR
+
+
 
 start:
 ' Set up screen
@@ -109,8 +129,8 @@ start:
 ' Debug
 	PRINT_XY(1, 23, "Map Loaded")
 ' Display player sprite
-	player_sprite_x = 150
-	player_sprite_y = 40
+	player_sprite_x = 120
+	player_sprite_y = 120
 	player_sprite_f = 0
 	player_sprite_d = FRAME_S
 	BANK SELECT SPRITE_BANK_1
@@ -121,35 +141,77 @@ start:
 
 	BANK SELECT MAIN_BANK
 	WHILE 1
-		player_sprite_m = 1
+		player_sprite_m = 0
+		map_flag_peek = 0
+
 		IF CONT1.UP THEN
-			player_sprite_y = player_sprite_y - 1
 			player_sprite_d = FRAME_N
-			player_sprite_m = 1
+			MAP_FLAG_AT(player_sprite_x+4, player_sprite_y+7, map_flag_peek)
+			MAP_FLAG_AT(player_sprite_x+1, player_sprite_y+7, map_flag_peek_1)
+			MAP_FLAG_AT(player_sprite_x+7, player_sprite_y+7, map_flag_peek_2)
+			IF map_flag_peek AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_1 AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_2 AND FLAG_SOLID THEN
+			ELSE
+				player_sprite_y = player_sprite_y - 1
+				player_sprite_m = 1
+			END IF
 		ELSEIF CONT1.DOWN THEN
-			player_sprite_y = player_sprite_y + 1
 			player_sprite_d = FRAME_S
-			player_sprite_m = 1
-		ELSEIF CONT1.LEFT THEN
-			player_sprite_x = player_sprite_x - 1
+			MAP_FLAG_AT(player_sprite_x+4, player_sprite_y+17, map_flag_peek)
+			MAP_FLAG_AT(player_sprite_x+1, player_sprite_y+17, map_flag_peek_1)
+			MAP_FLAG_AT(player_sprite_x+7, player_sprite_y+17, map_flag_peek_2)
+			IF map_flag_peek AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_1 AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_2 AND FLAG_SOLID THEN
+			ELSE
+				player_sprite_y = player_sprite_y + 1
+				player_sprite_m = 1
+			END IF
+		END IF
+
+		IF CONT1.LEFT THEN
 			player_sprite_d = FRAME_W
-			player_sprite_m = 1
+			MAP_FLAG_AT(player_sprite_x-1, player_sprite_y+12, map_flag_peek)
+			MAP_FLAG_AT(player_sprite_x-1, player_sprite_y+9, map_flag_peek_1)
+			MAP_FLAG_AT(player_sprite_x-1, player_sprite_y+14, map_flag_peek_2)
+			IF map_flag_peek AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_1 AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_2 AND FLAG_SOLID THEN
+			ELSE
+				player_sprite_x = player_sprite_x - 1
+				player_sprite_m = 1
+			END IF
 		ELSEIF CONT1.RIGHT THEN
-			player_sprite_x = player_sprite_x + 1
 			player_sprite_d = FRAME_E
-			player_sprite_m = 1
-		ELSEIF CONT1.BUTTON > 0 THEN
+			MAP_FLAG_AT(player_sprite_x+9, player_sprite_y+12, map_flag_peek)
+			MAP_FLAG_AT(player_sprite_x+9, player_sprite_y+9, map_flag_peek_1)
+			MAP_FLAG_AT(player_sprite_x+9, player_sprite_y+14, map_flag_peek_2)
+			IF map_flag_peek AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_1 AND FLAG_SOLID THEN
+			ELSEIF map_flag_peek_2 AND FLAG_SOLID THEN
+			ELSE
+				player_sprite_x = player_sprite_x + 1
+				player_sprite_m = 1
+			END IF
+		END IF
+
+		IF CONT1.BUTTON > 0 THEN
 			player_sprite_m = 1
 		ELSEIF CONT1.BUTTON2 > 0 THEN
 			player_sprite_m = 1
-		ELSE
-			player_sprite_m = 0
 		END IF
 		IF player_sprite_m > 0 THEN
 			IF (FRAME % 15) = 0 THEN player_sprite_f = player_sprite_f + 2
 			IF player_sprite_f > 3 THEN player_sprite_f = 0
 		END IF
 		SPRITE SPRITE_PLAYER, player_sprite_y,player_sprite_x,player_sprite_f+player_sprite_d
+' DEFINE VRAM READ #VRAM_TILE_MAP + ((player_sprite_x) / 8 + ((player_sprite_y+8) / 8) * 32)*2 + 1, 1, map_flag_peek
+		PRINT_XY(12, 23, map_flag_peek)
+		PRINT_XY(16, 23, "   ")
+		IF map_flag_peek AND FLAG_SOLID THEN PRINT_XY(16, 23, "S")
+		IF map_flag_peek AND FLAG_HARM THEN PRINT_XY(17, 23, "H")
+		IF map_flag_peek AND FLAG_BLESS THEN PRINT_XY(18, 23, "B")
 		WAIT
 	WEND
 	SCREEN DISABLE

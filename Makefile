@@ -1,3 +1,6 @@
+.POSIX:
+.SUFFIXES:
+#
 # Makefile for Lord Of Xmas.
 #
 BFLAGS = --sms
@@ -5,9 +8,11 @@ BC = cvbasic
 BLIB = $(HOME)/opt/nanochess/CVBasic
 ASM = gasm80
 ASMFLAGS = -sms
-EMU=mg -scale 5
+EMU=mg -tv -scale 5
 EMU2=gearsystem
-DEPS=nun.bas sprite1.bas tile2.bas map1.bas
+
+MAPS=./map/m0003-church.xml.bas
+DEPS=nun.bas sprite1.bas tile2.bas map1.bas $(MAPS)
 
 build: build/lox.sms
 	@echo "Built $<"
