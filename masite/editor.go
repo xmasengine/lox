@@ -26,6 +26,7 @@ type Editor struct {
 	TileWatcher  *Watcher
 	MessageTicks int
 	Backup
+	Commander *Tila
 }
 
 func (e Editor) Draw(screen *ebiten.Image) {
@@ -283,6 +284,8 @@ func (e *Editor) Update() error {
 		tiler.SetCaption("Tile")
 	case inpututil.IsKeyJustPressed(ebiten.KeyF5):
 		e.ExportBasic()
+	case inpututil.IsKeyJustPressed(ebiten.KeyF6):
+		e.Midget.AskCommand(10, 10, 300, 250, "Command", e.Commander)
 	case ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft):
 		if inpututil.KeyPressDuration(ebiten.KeyShiftLeft) > 0 {
 			e.Map.PutIndex(e.Tile, e.Cell.Index)
@@ -311,6 +314,18 @@ func (e *Editor) Update() error {
 	return nil
 }
 
+func (e *Editor) Wrap(t *Tila, args ...any) any {
+	if dx, err := TilaArg[int](args); err != nil {
+		return err
+	} else {
+		if e.Map != nil {
+			e.Map.Wrap(dx)
+			return dx
+		}
+		return false
+	}
+}
+
 func NewEditor(tm *Map, name string, w, h, scale int) *Editor {
 
 	e := &Editor{Map: tm, Name: name, Camera: image.Rect(0, 0, w, h),
@@ -322,6 +337,11 @@ func NewEditor(tm *Map, name string, w, h, scale int) *Editor {
 		e.TileWatcher = Watch(tm.From)
 	}
 	e.Backup.Pattern = "masite*.xml"
+	e.Commander = NewTila()
+	e.Commander.Commands["get"] = (*Tila).Get
+	e.Commander.Operators["$"] = (*Tila).Get
+	e.Commander.Commands["set"] = (*Tila).Set
+	e.Commander.Commands["wrap"] = e.Wrap
 
 	return e
 }

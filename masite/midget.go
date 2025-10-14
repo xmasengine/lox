@@ -516,6 +516,32 @@ func (m *Midget) AskText(x, y, w, h int, prompt string, t TextEncoding) *Asker {
 	return m.Ask(x, y, w, h, prompt, string(enc), on)
 }
 
+func (m *Midget) AskCommand(x, y, w, h int, prompt string, tila *Tila) *Asker {
+	var ask *Asker
+	showLines := (h / CaptionHeight) - 1
+	if showLines < 1 {
+		showLines = 1
+	}
+	on := func(sres string) bool {
+		res := tila.Run(sres)
+		if err, isErr := res.(error); isErr {
+			m.Error(x, y, w, h, err)
+		} else {
+			out := tila.Out.String()
+			lines := strings.Split(out, "\n")
+			if len(lines) > showLines {
+				lines = lines[len(lines)-showLines:]
+			}
+			ask.Prompt = strings.Join(lines, "\n")
+			ask.Buf = []rune{}
+			ask.Cursor = 0
+		}
+		return false
+	}
+	ask = m.Ask(x, y, w, h, prompt, "", on)
+	return ask
+}
+
 type Tiler struct {
 	Midget
 	On       func(x, y int)

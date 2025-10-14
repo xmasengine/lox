@@ -263,6 +263,22 @@ func (m *Map) Resize(w, h int) {
 	m.Height = h
 }
 
+func (m *Map) Wrap(by int) {
+	offx := by
+	if by >= m.Width {
+		offx = by % m.Width
+	}
+	if by < 0 {
+		offx = m.Width + (by % m.Width)
+	}
+
+	for y, row := range m.Rows {
+		pre, post := row.Cells[:offx], row.Cells[offx:]
+		row.Cells = append(post, pre...)
+		m.Rows[y] = row
+	}
+}
+
 func (m *Map) LoadSurface(name string) error {
 	img, err := LoadSurface(FromName(name))
 	if err != nil {
