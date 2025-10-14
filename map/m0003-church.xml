@@ -1,4 +1,31 @@
 <map width="32" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0003church">
+    <sprites from="./img/sprite1.png"></sprites>
+    <exits>
+        <north></north>
+        <east></east>
+        <south></south>
+        <west></west>
+        <in></in>
+        <out></out>
+        <up></up>
+        <down></down>
+    </exits>
+    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
+        <talk></talk>
+        <basic></basic>
+    </presences>
+    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
+        <talk></talk>
+        <basic></basic>
+    </presences>
+    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
+        <talk></talk>
+        <basic></basic>
+    </presences>
+    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
+        <talk></talk>
+        <basic></basic>
+    </presences>
     <rows>
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>
@@ -389,7 +416,7 @@
         <cells index="30" flag=""></cells>
         <cells index="30" flag=""></cells>
         <cells index="20" flag=""></cells>
-        <cells index="12" flag="H"></cells>
+        <cells index="12" flag=""></cells>
         <cells index="20" flag="H"></cells>
         <cells index="30" flag=""></cells>
         <cells index="30" flag=""></cells>
@@ -570,7 +597,7 @@
         <cells index="13" flag="HS"></cells>
         <cells index="26" flag="HV"></cells>
         <cells index="17" flag="HS"></cells>
-        <cells index="22" flag="H"></cells>
+        <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>
         <cells index="22" flag=""></cells>

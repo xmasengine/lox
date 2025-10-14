@@ -13,18 +13,20 @@ import (
 )
 
 type Editor struct {
-	Name         string
-	Map          *Map
-	Camera       image.Rectangle
-	Hover        image.Point
-	Tile         image.Point // Tile we are hovering
-	Cell         Cell
-	Scale        int
-	Error        error
-	Message      string
-	Midget       Midget // Child mini widgets
-	TileWatcher  *Watcher
-	MessageTicks int
+	Name          string
+	Map           *Map
+	Camera        image.Rectangle
+	Hover         image.Point
+	Tile          image.Point // Tile we are hovering
+	Cell          Cell
+	Scale         int
+	Error         error
+	Message       string
+	Midget        Midget // Child mini widgets
+	TileWatcher   *Watcher
+	SpriteWatcher *Watcher
+	MessageTicks  int
+	Presence      Presence
 	Backup
 	Commander *Tila
 }
@@ -87,6 +89,21 @@ func (e *Editor) LoadSurface(name string) bool {
 	return e.Error == nil
 }
 
+func (e *Editor) LoadSpriteSurface(name string) bool {
+	if e.SpriteWatcher != nil {
+		e.SpriteWatcher.Done <- struct{}{}
+		e.SpriteWatcher = nil
+	}
+	e.SpriteWatcher = Watch(name)
+	err := e.Map.Sprites.LoadSurface(name)
+	if err != nil {
+		e.UpdateTilers()
+	}
+	e.Error = err
+	e.Midget.Error(70, 70, 270, 120, err)
+	return e.Error == nil
+}
+
 func (e *Editor) ShowMessage(msg string, args ...any) {
 	e.Message = fmt.Sprintf(msg, args...)
 	e.MessageTicks = 60 * 15
@@ -113,8 +130,24 @@ func (e *Editor) UpdateWatcher() bool {
 		}
 		return e.Error == nil
 	default:
-		return false
+		break
 	}
+	if e.SpriteWatcher != nil {
+		select {
+		case name := <-e.SpriteWatcher.C:
+			err := e.Map.Sprites.LoadSurface(name)
+			e.Error = err
+			e.Midget.Error(70, 70, 270, 120, err)
+			if e.Error == nil {
+				e.ShowMessage("Auto update sprites: %s", name)
+				e.UpdateTilers()
+			}
+			return e.Error == nil
+		default:
+			break
+		}
+	}
+	return false
 }
 
 func (e *Editor) TileSelected(x, y int) {
@@ -125,6 +158,12 @@ func (e *Editor) TileSelected(x, y int) {
 		e.Cell.Flag |= FlagExtended
 	}
 	e.Cell.Index = byte(max(0, idx))
+}
+
+func (e *Editor) SpriteSelected(x, y int) {
+	_, h := e.Map.Surface.Size()
+	idx := x + y*(h/e.Map.Th)
+	e.Presence.Offset = max(0, idx)
 }
 
 func (e *Editor) SaveMap(name string) bool {
@@ -272,7 +311,12 @@ func (e *Editor) Update() error {
 			e.Midget.YesNo(50, 50, 250, 100, "Restore backup", "Y", e.Restore)
 		}
 	case inpututil.IsKeyJustPressed(ebiten.KeyF):
-		e.Midget.Ask(50, 50, 250, 100, "From", e.Map.From, e.LoadSurface)
+		if inpututil.KeyPressDuration(ebiten.KeyShiftLeft) > 0 {
+			e.Midget.Ask(50, 50, 250, 100, "Sprites", e.Map.Sprites.From, e.LoadSpriteSurface)
+		} else {
+			e.Midget.Ask(50, 50, 250, 100, "From", e.Map.From, e.LoadSurface)
+		}
+
 	case inpututil.IsKeyJustPressed(ebiten.KeyP):
 		e.Midget.AskString(50, 50, 250, 100, "Prefix", &e.Map.Prefix)
 	case inpututil.IsKeyJustPressed(ebiten.KeyO):
@@ -280,8 +324,13 @@ func (e *Editor) Update() error {
 	case inpututil.IsKeyJustPressed(ebiten.KeyS):
 		e.Midget.AskInt(50, 50, 250, 100, "UI Scale", &e.Scale)
 	case inpututil.IsKeyJustPressed(ebiten.KeyF3):
-		tiler := e.Midget.Tile(200, 100, e.Map.Surface, e.TileSelected)
-		tiler.SetCaption("Tile")
+		if inpututil.KeyPressDuration(ebiten.KeyShiftLeft) > 0 {
+			tiler := e.Midget.Tile(200, 100, e.Map.Sprites.Surface, e.SpriteSelected)
+			tiler.SetCaption("Sprite")
+		} else {
+			tiler := e.Midget.Tile(200, 100, e.Map.Surface, e.TileSelected)
+			tiler.SetCaption("Tile")
+		}
 	case inpututil.IsKeyJustPressed(ebiten.KeyF5):
 		e.ExportBasic()
 	case inpututil.IsKeyJustPressed(ebiten.KeyF6):
@@ -305,6 +354,8 @@ func (e *Editor) Update() error {
 			zero := Cell{}
 			e.Map.Put(e.Tile, zero)
 		}
+	case ebiten.IsMouseButtonPressed(ebiten.MouseButtonMiddle):
+		e.Map.PutPresence(e.Tile, e.Presence)
 	default:
 	}
 
@@ -326,6 +377,22 @@ func (e *Editor) Wrap(t *Tila, args ...any) any {
 	}
 }
 
+func (e *Editor) Roll(t *Tila, args ...any) any {
+	if dx, err := TilaArg[int](args); err != nil {
+		return err
+	} else {
+		if e.Map != nil {
+			e.Map.Roll(dx)
+			return dx
+		}
+		return false
+	}
+}
+
+func (e *Editor) CommandHelp(t *Tila, args ...any) any {
+	return "available commands: get, set, wrap, roll, help"
+}
+
 func NewEditor(tm *Map, name string, w, h, scale int) *Editor {
 
 	e := &Editor{Map: tm, Name: name, Camera: image.Rect(0, 0, w, h),
@@ -336,12 +403,17 @@ func NewEditor(tm *Map, name string, w, h, scale int) *Editor {
 	if tm.From != "" {
 		e.TileWatcher = Watch(tm.From)
 	}
+	if tm.Sprites.From != "" {
+		e.SpriteWatcher = Watch(tm.Sprites.From)
+	}
 	e.Backup.Pattern = "masite*.xml"
 	e.Commander = NewTila()
 	e.Commander.Commands["get"] = (*Tila).Get
 	e.Commander.Operators["$"] = (*Tila).Get
 	e.Commander.Commands["set"] = (*Tila).Set
 	e.Commander.Commands["wrap"] = e.Wrap
+	e.Commander.Commands["roll"] = e.Roll
+	e.Commander.Commands["help"] = e.CommandHelp
 
 	return e
 }

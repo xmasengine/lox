@@ -171,19 +171,223 @@ type Row struct {
 	Cells []Cell `json:"cells" xml:"cells"`
 }
 
-type Map struct {
-	XMLName xml.Name `json:"-" xml:"map"`
-	Width   int      `json:"width" xml:"width,attr"`
-	Height  int      `json:"height" xml:"height,attr"`
-	Tw      int      `json:"tw" xml:"tw,attr"`
-	Th      int      `json:"th" xml:"th,attr"`
-	Offset  int      `json:"offset" xml:"offset,attr"`
-	From    string   `json:"from" xml:"from,attr"`     // From where to load the images tiles.
-	Prefix  string   `json:"prefix" xml:"prefix,attr"` // Prefix in basic
-	Rows    []Row    `json:"rows" xml:"rows"`          // Rows.
+type Direction int
 
-	Surface *Surface `json:"-" xml:"-"` // Ebiten Surface for display.
-	Flags   bool     `json:"-" xml:"-"` // If true flags fill be drawn.
+const (
+	North Direction = iota
+	East
+	South
+	West
+	In
+	Out
+	Up
+	Down
+	LastDirection
+)
+
+func (e Direction) String() string {
+	switch e {
+	case North:
+		return "north"
+	case East:
+		return "east"
+	case South:
+		return "south"
+	case West:
+		return "west"
+	case In:
+		return "in"
+	case Out:
+		return "out"
+	case Up:
+		return "up"
+	case Down:
+		return "down"
+	case LastDirection:
+		return "last"
+	default:
+		return "unknown"
+	}
+}
+
+func (e Direction) MarshalText() (text []byte, err error) {
+	var str = e.String()
+	if str == "unknown" {
+		return nil, fmt.Errorf("error: Direction not known")
+	}
+	return []byte(str), nil
+}
+
+func (e *Direction) UnmarshalText(text []byte) error {
+	v := Direction(0)
+	str := string(text)
+	switch str {
+	case "north":
+		v = North
+	case "east":
+		v = East
+	case "south":
+		v = South
+	case "west":
+		v = West
+	case "in":
+		v = In
+	case "out":
+		v = Out
+	case "up":
+		v = Up
+	case "down":
+		v = Down
+	case "last":
+		v = LastDirection
+	default:
+		fmt.Errorf("error: Direction not known")
+	}
+	*e = v
+	return nil
+}
+
+type Exit struct {
+	Name   string `json:"name" xml:"name,attr,omitempty"`     // Name of the linked tile map.
+	Number int    `json:"number" xml:"number,attr,omitempty"` // Linked Map number in basic.
+}
+
+type Exits struct {
+	North Exit `json:"north" xml:"north"`
+	East  Exit `json:"east" xml:"east"`
+	South Exit `json:"south" xml:"south"`
+	West  Exit `json:"west" xml:"west"`
+	In    Exit `json:"in" xml:"in"`
+	Out   Exit `json:"out" xml:"out"`
+	Up    Exit `json:"up" xml:"up"`
+	Down  Exit `json:"down" xml:"down"`
+}
+
+// Kin is the type of a Presence
+type Kin int
+
+const (
+	EmptyKin Kin = iota
+	HumanKin
+	ItemKin
+	DoorKin
+	StairKin
+	ChestKin
+	ClueKin
+	SpiritKin
+	FoeKin
+	LastKin
+)
+
+func (e Kin) String() string {
+	switch e {
+	case EmptyKin:
+		return "empty"
+	case HumanKin:
+		return "human"
+	case ItemKin:
+		return "item"
+	case DoorKin:
+		return "door"
+	case StairKin:
+		return "stair"
+	case ChestKin:
+		return "chest"
+	case ClueKin:
+		return "clue"
+	case SpiritKin:
+		return "spirit"
+	case FoeKin:
+		return "foe"
+	case LastKin:
+		return "last"
+	default:
+		return "unknown"
+	}
+}
+
+func (e Kin) MarshalText() (text []byte, err error) {
+	var str = e.String()
+	if str == "unknown" {
+		return nil, fmt.Errorf("error: Kin not known")
+	}
+	return []byte(str), nil
+}
+
+func (e *Kin) UnmarshalText(text []byte) error {
+	v := Kin(0)
+	str := string(text)
+	switch str {
+	case "empty":
+		v = EmptyKin
+	case "human":
+		v = HumanKin
+	case "item":
+		v = ItemKin
+	case "door":
+		v = DoorKin
+	case "stair":
+		v = StairKin
+	case "chest":
+		v = ChestKin
+	case "clue":
+		v = ClueKin
+	case "spirit":
+		v = SpiritKin
+	case "foe":
+		v = FoeKin
+	case "last":
+		v = LastKin
+	default:
+		fmt.Errorf("error: Kin not known")
+	}
+	*e = v
+	return nil
+}
+
+const MaxPresence = 4
+
+// A presence is anything that is present on the tile map apart
+// from the player.
+type Presence struct {
+	Kin    Kin    `json:"kin" xml:"kin,attr"` // Kin is the kind of presence.
+	X      int    `json:"tw" xml:"tx,attr"`   // X where the presence starts out.
+	Y      int    `json:"th" xml:"ty,attr"`   // Y where the presence starts out.
+	Width  int    `json:"width" xml:"width,attr"`
+	Height int    `json:"height" xml:"height,attr"`
+	Offset int    `json:"offset" xml:"offset,attr"`
+	Frames int    `json:"frames" xml:"frames,attr"`
+	Item   int    `json:"item" xml:"item,attr"`
+	Money  int    `json:"money" xml:"money,attr"`
+	Talk   string `json:"talk" xml:"talk"`
+	Basic  string `json:"basic" xml:"basic"`
+}
+
+// Sprites associated with this map.
+// We allow only one sprite sheet per map,
+// the player has a separate sprite sheet.
+type Sprites struct {
+	From    string   `json:"from" xml:"from,attr"`               // From where to load the sprites or tiles.
+	Number  int      `json:"number" xml:"number,attr,omitempty"` // Sheet number in basic.
+	Surface *Surface `json:"-" xml:"-"`                          // Ebiten Surface for display.
+}
+
+type Map struct {
+	XMLName   xml.Name   `json:"-" xml:"map"`
+	Width     int        `json:"width" xml:"width,attr"`
+	Height    int        `json:"height" xml:"height,attr"`
+	Tw        int        `json:"tw" xml:"tw,attr"`
+	Th        int        `json:"th" xml:"th,attr"`
+	Offset    int        `json:"offset" xml:"offset,attr"`
+	From      string     `json:"from" xml:"from,attr"`               // From where to load the images tiles.
+	Prefix    string     `json:"prefix" xml:"prefix,attr"`           // Prefix in basic.
+	Number    int        `json:"number" xml:"number,attr,omitempty"` // Map number in basic.
+	Sprites   Sprites    `json:"sprites" xml:"sprites"`              // Sprites.
+	Exits     Exits      `json:"exits" xml:"exits"`                  // Exits.
+	Presences []Presence `json:"presences" xml:"presences"`          // Presences.
+	Rows      []Row      `json:"rows" xml:"rows"`                    // Rows.
+	Surface   *Surface   `json:"-" xml:"-"`                          // Ebiten Surface for display.
+	Flags     bool       `json:"-" xml:"-"`                          // If true flags fill be drawn.
 }
 
 func FormatFor(name string) Format {
@@ -235,6 +439,13 @@ func LoadMapFromFile(f *os.File) (*Map, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	if res.Sprites.From != "" {
+		err = res.Sprites.LoadSurface(res.Sprites.From)
+		if err != nil {
+			return nil, err
+		}
+	}
 	return res, nil
 }
 
@@ -279,6 +490,19 @@ func (m *Map) Wrap(by int) {
 	}
 }
 
+func (m *Map) Roll(by int) {
+	offy := by
+	if by >= m.Height {
+		offy = by % m.Height
+	}
+	if by < 0 {
+		offy = m.Height + (by % m.Height)
+	}
+
+	pre, post := m.Rows[:offy], m.Rows[offy:]
+	m.Rows = append(post, pre...)
+}
+
 func (m *Map) LoadSurface(name string) error {
 	img, err := LoadSurface(FromName(name))
 	if err != nil {
@@ -286,6 +510,16 @@ func (m *Map) LoadSurface(name string) error {
 	}
 	m.From = name
 	m.Surface = img
+	return nil
+}
+
+func (s *Sprites) LoadSurface(name string) error {
+	img, err := LoadSurface(FromName(name))
+	if err != nil {
+		return errors.Join(errors.New("Cannot load image:"+name), err)
+	}
+	s.From = name
+	s.Surface = img
 	return nil
 }
 
@@ -317,6 +551,23 @@ func (m *Map) PutIndex(atTile Point, idx byte) {
 		return
 	}
 	m.Rows[atTile.Y].Cells[atTile.X].Index = idx
+}
+
+// Puts the presnece into the map.
+// If the map is in flag mode, only the cell flag will be set.
+func (m *Map) PutPresence(atTile Point, presence Presence) {
+	if len(m.Presences) >= MaxPresence {
+		return
+	}
+	presence.X = atTile.X * m.Tw
+	presence.Y = atTile.Y * m.Th
+	if presence.Width < 1 {
+		presence.Width = 32
+	}
+	if presence.Height < 1 {
+		presence.Height = 64
+	}
+	m.Presences = append(m.Presences, presence)
 }
 
 func (m *Map) Inside(atTile Point) bool {
@@ -373,6 +624,45 @@ func (m *Map) ExportToFile(f *os.File, form Format) error {
 }
 
 var blockColor = RGBA{R: 66, B: 66, G: 66, A: 0xaa}
+var presenceColor = RGBA{R: 00, B: 66, G: 66, A: 0xaa}
+
+func (m *Map) RenderPresences(screen *Surface, camera Rectangle) {
+
+	starty := camera.Min.Y / m.Th
+	if starty < 0 {
+		starty = 0
+	}
+
+	for _, presence := range m.Presences {
+
+		atx := presence.X - camera.Min.X
+		aty := presence.Y - camera.Min.Y
+
+		if m.Sprites.Surface == nil || m.Flags {
+			to := Bounds(atx, aty, m.Tw, m.Th)
+			FillRect(screen, to, presenceColor)
+			// draw colored rectangle if sprites are not available.
+			if m.Sprites.Surface == nil {
+				continue
+			}
+		}
+
+		ab := m.Sprites.Surface.Bounds()
+		tilew := ab.Dx() / m.Tw
+		id := presence.Offset
+		idx := id % tilew
+		idy := id / tilew
+		fx := idx * m.Tw
+		fy := idy * m.Th
+		from := image.Rect(fx, fy, fx+presence.Width, fy+presence.Height)
+		sub := m.Sprites.Surface.SubImage(from).(*Surface)
+		opts := ebiten.DrawImageOptions{}
+		opts.GeoM.Translate(float64(atx), float64(aty))
+		if sub != nil {
+			screen.DrawImage(sub, &opts)
+		}
+	}
+}
 
 func (m *Map) Render(screen *Surface, camera Rectangle) {
 	ab := m.Surface.Bounds()
@@ -428,6 +718,7 @@ func (m *Map) Render(screen *Surface, camera Rectangle) {
 			}
 		}
 	}
+	m.RenderPresences(screen, camera)
 }
 
 func (m *Map) FloodFill(atTile Point, cell Cell) {
