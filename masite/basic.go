@@ -109,8 +109,8 @@ func (m *Map) Basic(out io.Writer) error {
 			cell := m.Get(image.Pt(x, y))
 
 			flag := byte(cell.Flag)
-
-			fmt.Fprintf(out, "$%02x,$%02x", byte(cell.Index), flag)
+			index := cell.Index + byte(m.Offset)
+			fmt.Fprintf(out, "$%02x,$%02x", byte(index), flag)
 		}
 		fmt.Fprintf(out, "\n")
 	}

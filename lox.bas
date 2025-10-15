@@ -7,7 +7,7 @@ OPTION EXPLICIT
 DEF FN PRINT_XY(X, Y, S) = PRINT AT X+Y*32,S
 
 ' Tile/Char memory layout:
-' Tile 0 -> 32: Common tiles.
+' Tile 0 -> 32: HUD tiles.
 ' CVBasic loads a default font in the tiles from 32 to 127
 ' I will likely use a few less useful characters as icons or for translations.
 ' Tile 128 -> 191: Map tiles.
@@ -18,14 +18,26 @@ CONST TILE_MAP_MIN  = 128
 CONST TILE_MAP_LEN  = 64
 CONST TILE_MAP_MAX  = 128 + TILE_MAP_LEN
 
-' Sprite Layout
-' First 16 sprites: player.
-' Next 16 sprites: player weapon.
-' Next 16 sprites: Menu icons. (?)
-' Next 16 sprites: Foe projectiles.
-' Then each sprite per 16.
+' 8 frames per player, foe, or character, 2 per direction for animation.
+' Sprite layout on normal screen: 128 sprites available.
+'  0 -   7: Player 1.
+'  8 -  15: Player 1 special action.
+' 16 -  19: Player 1 weapon.
+' 20 -  23: Player 1 projectile.
+' 24 -  31: Player 2.
+' 32 -  39: Player 2 special action.
+' 40 -  43: Player 2 weapon.
+' 44 -  47: Player 2 projectile.
+' 48 -  64: HUD Icons (16).
+' 64 - 128: Presences loaded by the map. Includes foe weapons and projectiles.
+'
+' Sprite layout on menu screen is different and only has icons.
+' Icon 0 is the cursor.
+'
+
 CONST SPRITE_PLAYER = 0
 CONST SPRITE_WEAPON = 16
+CONST SPRITE_MAP    = 64
 
 CONST MAIN_BANK = 0
 
@@ -80,7 +92,6 @@ DIM map_flag_peek_1
 DIM map_flag_peek_2
 
 
-
 CONST BORDER_LEFT_ON=1
 CONST BORDER_NO_SCROLL_LEFT=2
 CONST BORDER_NO_SCROLL_BOTTOM=2
@@ -121,7 +132,7 @@ start:
 
 ' Load tile map: select bank, load CHAR bitmaps, load map as screen
 	BANK SELECT MAP_BANK_3
-	DEFINE CHAR 0,32,m0003church_bitmap
+	DEFINE CHAR 128,32,m0003church_bitmap
 ' Should not need parameters as a single map is a single screen for now
 	SCREEN m0003church_map
 ' Palette is loaded though a gosub

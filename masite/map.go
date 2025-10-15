@@ -253,14 +253,14 @@ type Exit struct {
 }
 
 type Exits struct {
-	North Exit `json:"north" xml:"north"`
-	East  Exit `json:"east" xml:"east"`
-	South Exit `json:"south" xml:"south"`
-	West  Exit `json:"west" xml:"west"`
-	In    Exit `json:"in" xml:"in"`
-	Out   Exit `json:"out" xml:"out"`
-	Up    Exit `json:"up" xml:"up"`
-	Down  Exit `json:"down" xml:"down"`
+	North Exit `json:"north,omitempty" xml:"north,omitempty"`
+	East  Exit `json:"east,omitempty" xml:"east,omitempty"`
+	South Exit `json:"south,omitempty" xml:"south,omitempty"`
+	West  Exit `json:"west,omitempty" xml:"west,omitempty"`
+	In    Exit `json:"in,omitempty" xml:"in,omitempty"`
+	Out   Exit `json:"out,omitempty" xml:"out,omitempty"`
+	Up    Exit `json:"up,omitempty" xml:"up,omitempty"`
+	Down  Exit `json:"down,omitempty" xml:"down,omitempty"`
 }
 
 // Kin is the type of a Presence
@@ -351,16 +351,16 @@ const MaxPresence = 4
 // from the player.
 type Presence struct {
 	Kin    Kin    `json:"kin" xml:"kin,attr"` // Kin is the kind of presence.
-	X      int    `json:"tw" xml:"tx,attr"`   // X where the presence starts out.
-	Y      int    `json:"th" xml:"ty,attr"`   // Y where the presence starts out.
+	X      int    `json:"x" xml:"x,attr"`     // X where the presence starts out.
+	Y      int    `json:"y" xml:"y,attr"`     // Y where the presence starts out.
 	Width  int    `json:"width" xml:"width,attr"`
 	Height int    `json:"height" xml:"height,attr"`
 	Offset int    `json:"offset" xml:"offset,attr"`
-	Frames int    `json:"frames" xml:"frames,attr"`
-	Item   int    `json:"item" xml:"item,attr"`
-	Money  int    `json:"money" xml:"money,attr"`
-	Talk   string `json:"talk" xml:"talk"`
-	Basic  string `json:"basic" xml:"basic"`
+	Frames int    `json:"frames" xml:"frames,attr,omitempty"`
+	Item   int    `json:"item" xml:"item,attr,omitempty"`
+	Money  int    `json:"money" xml:"money,attr,omitempty"`
+	Talk   string `json:"talk" xml:"talk,omitempty"`
+	Basic  string `json:"basic" xml:"basic,omitempty"`
 }
 
 // Sprites associated with this map.
@@ -382,6 +382,8 @@ type Map struct {
 	From      string     `json:"from" xml:"from,attr"`               // From where to load the images tiles.
 	Prefix    string     `json:"prefix" xml:"prefix,attr"`           // Prefix in basic.
 	Number    int        `json:"number" xml:"number,attr,omitempty"` // Map number in basic.
+	Border    int        `json:"border" xml:"border,attr,omitempty"` // Border color.
+	Music     int        `json:"music" xml:"music,attr,omitempty"`   // Music index.
 	Sprites   Sprites    `json:"sprites" xml:"sprites"`              // Sprites.
 	Exits     Exits      `json:"exits" xml:"exits"`                  // Exits.
 	Presences []Presence `json:"presences" xml:"presences"`          // Presences.

@@ -1,4 +1,4 @@
-<map width="32" height="24" tw="8" th="8" offset="0" from="./map/tile5.png" prefix="m0003church">
+<map width="32" height="24" tw="8" th="8" offset="128" from="./map/tile5.png" prefix="m0003church">
     <sprites from="./img/sprite1.png"></sprites>
     <exits>
         <north></north>
@@ -10,22 +10,7 @@
         <up></up>
         <down></down>
     </exits>
-    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
-        <talk></talk>
-        <basic></basic>
-    </presences>
-    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
-        <talk></talk>
-        <basic></basic>
-    </presences>
-    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
-        <talk></talk>
-        <basic></basic>
-    </presences>
-    <presences kin="empty" tx="120" ty="168" width="32" height="64" offset="1" frames="0" item="0" money="0">
-        <talk></talk>
-        <basic></basic>
-    </presences>
+    <presences kin="empty" x="120" y="168" width="32" height="64" offset="1"></presences>
     <rows>
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>
