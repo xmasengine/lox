@@ -122,12 +122,16 @@ start:
 	SCREEN nun_pattern,0,300,8,8,8
 ' Show opening message
 	BANK SELECT 0
-	PRINT_XY(10, 4,"Lord Of Xmas")
-	PRINT_XY(6, 5,"By xmasengine, 2025")
-	PRINT_XY(6, 6,"Press a button")
+	PRINT_XY(10, 3,"Lord Of Xmas")
+	PRINT_XY(6, 4,"By xmasengine, 2025")
+	PRINT_XY(6, 5,"Press a button")
+	PRINT_XY(0, 6," ")
+	PLAY SIMPLE
+	PLAY music_kyrie_eleison
 
 ' Wait for button press
-	WHILE CONT.BUTTON = 0 AND CONT.BUTTON2 =0
+	WHILE CONT.BUTTON = 0 AND CONT.BUTTON2 = 0
+	WAIT
 	WEND
 
 ' Load tile map: select bank, load CHAR bitmaps, load map as screen
@@ -229,6 +233,77 @@ start:
 	WAIT
 ' halt
 done: GOTO done
+	music_0: DATA BYTE 32
+	MUSIC D4F
+	MUSIC S
+	MUSIC C4
+	MUSIC D4
+	MUSIC S
+	MUSIC -
+	MUSIC D4F,D4Z
+	MUSIC S,C4
+	MUSIC C4,C4
+	MUSIC D4,D4
+	MUSIC S,S
+	MUSIC -,S
+	MUSIC D4
+	MUSIC S
+	MUSIC E4
+	MUSIC F4
+	MUSIC S
+	MUSIC -
+	MUSIC D4,D4
+	MUSIC S,E4
+	MUSIC E4,G4
+	MUSIC F4,F4
+	MUSIC S,S
+	MUSIC -,S
+	MUSIC F4
+	MUSIC S
+	MUSIC G4
+	MUSIC S
+	MUSIC D4
+	MUSIC S
+	MUSIC F4,-
+	MUSIC S,F4
+	MUSIC G4,S
+	MUSIC S,G4
+	MUSIC D4,S
+	MUSIC S,D4
+	MUSIC C4
+	MUSIC D4
+	MUSIC A4
+	MUSIC A4
+	MUSIC G4
+	MUSIC -
+	MUSIC F4
+	MUSIC S
+	MUSIC G4
+	MUSIC S
+	MUSIC D4
+	MUSIC S
+	MUSIC F4
+	MUSIC E4
+	MUSIC F4
+	MUSIC E4
+	MUSIC D4
+	MUSIC -
+	MUSIC A4
+	MUSIC S
+	MUSIC G4
+	MUSIC S
+	MUSIC F4
+	MUSIC S
+	MUSIC E4
+	MUSIC S
+	MUSIC F4
+	MUSIC S
+	MUSIC -
+	MUSIC -
+	MUSIC REPEAT
+    MUSIC STOP
+	include "./music/kirie.bas"
+
 ' Sprite bank
 	BANK 4
 	INCLUDE "sprite1.bas"
