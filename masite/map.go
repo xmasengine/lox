@@ -555,8 +555,8 @@ func (m *Map) PutIndex(atTile Point, idx byte) {
 	m.Rows[atTile.Y].Cells[atTile.X].Index = idx
 }
 
-const DefaultPresenceWidth = 16
-const DefaultPresenceHeight = 32
+const DefaultPresenceWidth = 8
+const DefaultPresenceHeight = 16
 
 // Puts the presnece into the map.
 // If the map is in flag mode, only the cell flag will be set.
