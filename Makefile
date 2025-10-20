@@ -12,7 +12,8 @@ EMU=mg -tv -scale 5
 EMU2=gearsystem
 
 MAPS=./map/m0003-church.xml.bas
-DEPS=nun.bas sprite1.bas tile2.bas map1.bas $(MAPS)
+MUSIC=./music/kirie.bas
+DEPS=nun.bas sprite1.bas tile2.bas map1.bas $(MAPS) $(MUSIC)
 
 build: build/lox.sms
 	@echo "Built $<"

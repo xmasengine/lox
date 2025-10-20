@@ -10,7 +10,7 @@
         <up></up>
         <down></down>
     </exits>
-    <presences kin="empty" x="120" y="168" width="32" height="64" offset="1"></presences>
+    <presences kin="empty" x="120" y="168" width="8" height="16" offset="1"></presences>
     <rows>
         <cells index="23" flag=""></cells>
         <cells index="23" flag=""></cells>

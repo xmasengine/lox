@@ -555,6 +555,9 @@ func (m *Map) PutIndex(atTile Point, idx byte) {
 	m.Rows[atTile.Y].Cells[atTile.X].Index = idx
 }
 
+const DefaultPresenceWidth = 16
+const DefaultPresenceHeight = 32
+
 // Puts the presnece into the map.
 // If the map is in flag mode, only the cell flag will be set.
 func (m *Map) PutPresence(atTile Point, presence Presence) {
@@ -564,10 +567,10 @@ func (m *Map) PutPresence(atTile Point, presence Presence) {
 	presence.X = atTile.X * m.Tw
 	presence.Y = atTile.Y * m.Th
 	if presence.Width < 1 {
-		presence.Width = 32
+		presence.Width = DefaultPresenceWidth
 	}
 	if presence.Height < 1 {
-		presence.Height = 64
+		presence.Height = DefaultPresenceHeight
 	}
 	m.Presences = append(m.Presences, presence)
 }
@@ -626,7 +629,11 @@ func (m *Map) ExportToFile(f *os.File, form Format) error {
 }
 
 var blockColor = RGBA{R: 66, B: 66, G: 66, A: 0xaa}
-var presenceColor = RGBA{R: 00, B: 66, G: 66, A: 0xaa}
+
+// var presenceColor = RGBA{R: 00, B: 66, G: 66, A: 0xaa}
+var presenceColor = RGBA{R: 240, B: 66, G: 66, A: 0xaa}
+
+const FeetHeight = 8
 
 func (m *Map) RenderPresences(screen *Surface, camera Rectangle) {
 
@@ -643,12 +650,16 @@ func (m *Map) RenderPresences(screen *Surface, camera Rectangle) {
 		if m.Sprites.Surface == nil || m.Flags {
 			to := Bounds(atx, aty, m.Tw, m.Th)
 			FillRect(screen, to, presenceColor)
-			// draw colored rectangle if sprites are not available.
-			if m.Sprites.Surface == nil {
-				continue
-			}
+			// draw colored rectangle if sprites are not available
+			// or if flags mode is set
 		}
 
+		if m.Sprites.Surface == nil {
+			continue
+		}
+
+		aty = aty - presence.Height + FeetHeight
+		// "shift up so the "feet" stand on the position of the presence.
 		ab := m.Sprites.Surface.Bounds()
 		tilew := ab.Dx() / m.Tw
 		id := presence.Offset

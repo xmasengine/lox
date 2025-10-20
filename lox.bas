@@ -127,7 +127,7 @@ start:
 	PRINT_XY(6, 5,"Press a button")
 	PRINT_XY(0, 6," ")
 	PLAY SIMPLE
-	PLAY music_kyrie_eleison
+	PLAY music_kirie
 
 ' Wait for button press
 	WHILE CONT.BUTTON = 0 AND CONT.BUTTON2 = 0
