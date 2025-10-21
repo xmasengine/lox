@@ -558,7 +558,7 @@ func (m *Map) PutIndex(atTile Point, idx byte) {
 const DefaultPresenceWidth = 8
 const DefaultPresenceHeight = 16
 
-// Puts the presnece into the map.
+// Puts the presence into the map.
 // If the map is in flag mode, only the cell flag will be set.
 func (m *Map) PutPresence(atTile Point, presence Presence) {
 	if len(m.Presences) >= MaxPresence {

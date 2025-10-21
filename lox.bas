@@ -127,10 +127,13 @@ start:
 	PRINT_XY(6, 5,"Press a button")
 	PRINT_XY(0, 6," ")
 	PLAY SIMPLE
-	PLAY music_kirie
+	PLAY music_gloria
 
 ' Wait for button press
 	WHILE CONT.BUTTON = 0 AND CONT.BUTTON2 = 0
+		if CONT1.UP = 1 then
+			PLAY music_kirie
+		end if
 	WAIT
 	WEND
 
@@ -303,6 +306,7 @@ done: GOTO done
 	MUSIC REPEAT
     MUSIC STOP
 	include "./music/kirie.bas"
+	include "./music/gloria.bas"
 
 ' Sprite bank
 	BANK 4
