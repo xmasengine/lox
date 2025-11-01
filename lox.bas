@@ -127,11 +127,19 @@ start:
 	PRINT_XY(6, 5,"Press a button")
 	PRINT_XY(0, 6," ")
 	PLAY SIMPLE
-	PLAY music_gloria
+	PLAY music_grabe
 
 ' Wait for button press
 	WHILE CONT.BUTTON = 0 AND CONT.BUTTON2 = 0
-		if CONT1.UP = 1 then
+		if CONT.UP = 1 then
+			PLAY music_gloria
+		end if
+
+		if CONT.DOWN = 1 then
+			PLAY music_nocturne
+		end if
+
+		if CONT.LEFT = 1 then
 			PLAY music_kirie
 		end if
 	WAIT
@@ -307,6 +315,7 @@ done: GOTO done
     MUSIC STOP
 	include "./music/kirie.bas"
 	include "./music/gloria.bas"
+	include "./music/nocturne.bas"
 
 ' Sprite bank
 	BANK 4
@@ -316,7 +325,7 @@ done: GOTO done
 	INCLUDE "tile2.bas"
 ' Intro image bank
 	BANK BACK_BANK_1
-	INCLUDE "nun.bas"
+	INCLUDE "./img/nun.bas"
 	BANK MAP_BANK_1
 	INCLUDE "map1.bas"
     BANK MAP_BANK_3
