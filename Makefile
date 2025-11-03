@@ -40,4 +40,10 @@ clean:
 img/nun.bas: img/nun.png
 	tmscolor -sms -p2 -b -t128 img/nun.png img/nun.bas nun
 
+build/res2bas: cmd/res2bas/res2bas.go
+	go build -o build/res2bas ./cmd/res2bas
+
+sprite1.bas: build/res2bas img/sprite1.png
+	build/res2bas -m sprite -i ./img/sprite1.png -o sprite1.bas
+
 .PHONY: run clean build gs

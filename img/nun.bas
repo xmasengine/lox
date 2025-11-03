@@ -1,6 +1,6 @@
 	' TMSColor 3.2 Aug/26/2025
-	' Command: tmscolor -sms -b -t128 img/nun.png img/nun.bas nun 
-	' Created: Sat Nov  1 22:16:28 2025
+	' Command: tmscolor -sms -p2 -b -t128 img/nun.png img/nun.bas nun 
+	' Created: Mon Nov  3 23:21:45 2025
 
 	' Display image.
 	MODE 4
@@ -32,16 +32,16 @@ nun_char:
 	DATA BYTE $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
 	DATA BYTE $fe,$ff,$ff,$ff,$ff,$ff,$ff,$ff
 	DATA BYTE $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-	DATA BYTE $ff,$ff,$ff,$ff,$83,$6f,$00,$7f
+	DATA BYTE $ff,$ff,$ff,$ff,$ef,$6c,$00,$7f
 	DATA BYTE $40,$af,$af,$80,$a0,$c0,$c0,$c0
-	DATA BYTE $10,$ff,$ef,$ff,$b0,$ff,$f7,$ff
-	DATA BYTE $e0,$ff,$e7,$ff,$c0,$ff,$ee,$ff
-	DATA BYTE $80,$ff,$fe,$ff,$a0,$ff,$46,$bf
-	DATA BYTE $00,$ef,$f8,$17,$00,$28,$2f,$07
-	DATA BYTE $00,$ff,$ff,$ff,$00,$ff,$7f,$ff
-	DATA BYTE $00,$ff,$3f,$ff,$00,$ff,$3f,$ff
-	DATA BYTE $00,$ff,$9f,$ff,$00,$fe,$8f,$ff
-	DATA BYTE $00,$ff,$0f,$ff,$00,$ff,$2b,$ff
+	DATA BYTE $10,$ff,$ef,$ff,$b8,$ff,$f7,$f7
+	DATA BYTE $f8,$ff,$e7,$e7,$d1,$ff,$ee,$ee
+	DATA BYTE $81,$ff,$fe,$fe,$b9,$5f,$46,$be
+	DATA BYTE $07,$ef,$f8,$16,$00,$28,$2f,$07
+	DATA BYTE $00,$ff,$ff,$ff,$80,$ff,$7f,$7f
+	DATA BYTE $c0,$ff,$3f,$3f,$c0,$ff,$3f,$3f
+	DATA BYTE $60,$ff,$9f,$9f,$70,$fe,$8f,$8f
+	DATA BYTE $f0,$ff,$0f,$0f,$d4,$ff,$2b,$2b
 	DATA BYTE $00,$02,$fa,$18,$00,$02,$fe,$fc
 	DATA BYTE $00,$02,$fe,$fc,$00,$07,$df,$d8
 	DATA BYTE $00,$02,$8a,$89,$00,$04,$04,$03
@@ -53,11 +53,11 @@ nun_char:
 	DATA BYTE $41,$3f,$3f,$3f,$bf,$7f,$7f,$7f
 	DATA BYTE $7f,$ff,$ff,$ff,$ff,$ff,$ff,$ff
 	DATA BYTE $ff,$ff,$ff,$ff,$fc,$ff,$ff,$ff
-	DATA BYTE $e0,$ff,$ff,$e0,$80,$fe,$e0,$9f
+	DATA BYTE $e0,$ff,$ff,$e0,$9e,$fe,$e0,$9f
 	DATA BYTE $fe,$ff,$ff,$ff,$ff,$ff,$ff,$ff
 	DATA BYTE $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
 	DATA BYTE $ff,$ff,$ff,$ff,$1f,$ff,$ff,$ff
-	DATA BYTE $03,$ff,$ff,$07,$00,$97,$07,$f8
+	DATA BYTE $03,$ff,$ff,$07,$90,$97,$07,$f8
 	DATA BYTE $3f,$ff,$ff,$ff,$df,$ff,$ff,$ff
 	DATA BYTE $ef,$ef,$ff,$ef,$f3,$f7,$ff,$f7
 	DATA BYTE $f9,$fb,$ff,$fb,$f8,$fd,$ff,$fd
@@ -67,144 +67,144 @@ nun_char:
 	DATA BYTE $87,$fb,$fb,$fb,$07,$fb,$fb,$fb
 	DATA BYTE $06,$fb,$fb,$fb,$06,$79,$f9,$79
 	DATA BYTE $00,$ec,$ee,$e2,$e0,$f3,$f3,$e0
-	DATA BYTE $c0,$f8,$f4,$ec,$c0,$fd,$e7,$ff
-	DATA BYTE $80,$ff,$f3,$ff,$00,$ff,$ff,$ff
+	DATA BYTE $c8,$f8,$f4,$e4,$d8,$fd,$e7,$e7
+	DATA BYTE $8c,$ff,$f3,$f3,$00,$ff,$ff,$ff
 	DATA BYTE $00,$ff,$ff,$ff,$00,$ff,$ff,$ff
-	DATA BYTE $00,$73,$4f,$7c,$20,$e7,$df,$38
-	DATA BYTE $00,$3c,$3c,$00,$00,$62,$41,$63
-	DATA BYTE $00,$ff,$f8,$ff,$00,$fc,$f3,$ff
-	DATA BYTE $00,$fc,$e3,$ff,$00,$fc,$82,$fe
+	DATA BYTE $30,$73,$4f,$4c,$20,$c7,$df,$38
+	DATA BYTE $00,$3c,$3c,$00,$22,$62,$41,$41
+	DATA BYTE $07,$ff,$f8,$f8,$0c,$fc,$f3,$f3
+	DATA BYTE $1c,$fc,$e3,$e3,$7c,$fc,$82,$82
 	DATA BYTE $00,$07,$f7,$f0,$00,$05,$05,$02
-	DATA BYTE $12,$16,$04,$13,$10,$12,$c2,$d5
-	DATA BYTE $03,$1f,$dc,$c3,$13,$1f,$0c,$13
-	DATA BYTE $23,$2f,$0c,$33,$27,$2f,$88,$b7
+	DATA BYTE $12,$04,$04,$13,$10,$02,$c2,$d5
+	DATA BYTE $03,$1c,$dc,$c3,$13,$0c,$0c,$13
+	DATA BYTE $23,$0c,$0c,$33,$27,$08,$88,$b7
 	DATA BYTE $07,$63,$63,$83,$0a,$67,$67,$86
-	DATA BYTE $0a,$77,$77,$86,$08,$f7,$f6,$05
-	DATA BYTE $08,$f7,$f6,$05,$08,$c7,$c6,$05
-	DATA BYTE $08,$d7,$d6,$05,$08,$d6,$d6,$05
-	DATA BYTE $00,$bf,$80,$7f,$30,$71,$00,$ff
-	DATA BYTE $28,$ff,$11,$ee,$56,$df,$00,$ff
-	DATA BYTE $57,$ff,$27,$df,$9f,$9f,$07,$bf
-	DATA BYTE $2f,$3f,$07,$bf,$01,$ff,$61,$9f
-	DATA BYTE $00,$eb,$01,$fe,$20,$ff,$00,$ff
-	DATA BYTE $1d,$ff,$80,$7f,$0f,$ff,$60,$9f
-	DATA BYTE $e2,$ff,$18,$e7,$c0,$ff,$83,$fc
-	DATA BYTE $f0,$ff,$e0,$ff,$e0,$ef,$cf,$f0
-	DATA BYTE $00,$7f,$7f,$3f,$00,$5f,$1f,$df
-	DATA BYTE $00,$ef,$0f,$ef,$80,$e7,$07,$f7
-	DATA BYTE $c0,$ff,$07,$fb,$90,$ff,$03,$fd
-	DATA BYTE $08,$bd,$81,$7e,$80,$ae,$20,$ce
+	DATA BYTE $0a,$77,$77,$86,$09,$f7,$f6,$05
+	DATA BYTE $09,$f7,$f6,$05,$09,$c7,$c6,$05
+	DATA BYTE $09,$d7,$d6,$05,$08,$d6,$d6,$05
+	DATA BYTE $3f,$bf,$80,$7f,$71,$71,$00,$ff
+	DATA BYTE $ee,$f7,$11,$ee,$df,$cf,$00,$ff
+	DATA BYTE $df,$ef,$27,$df,$9f,$8f,$07,$bf
+	DATA BYTE $3f,$1f,$07,$bf,$9f,$ff,$61,$9f
+	DATA BYTE $ea,$eb,$01,$fe,$ff,$ff,$00,$ff
+	DATA BYTE $7f,$ff,$80,$7f,$9f,$ff,$60,$9f
+	DATA BYTE $e7,$df,$18,$e7,$fc,$ff,$83,$fc
+	DATA BYTE $ff,$ff,$e0,$ff,$e0,$ef,$cf,$f0
+	DATA BYTE $00,$7f,$7f,$3f,$40,$5f,$1f,$df
+	DATA BYTE $e0,$ef,$0f,$ef,$e0,$e7,$07,$f7
+	DATA BYTE $f8,$ff,$07,$fb,$fc,$ff,$03,$fd
+	DATA BYTE $3c,$bd,$81,$7e,$8e,$2e,$20,$ce
 	DATA BYTE $03,$3d,$fd,$3d,$03,$bd,$fd,$bd
 	DATA BYTE $01,$9e,$fe,$9e,$01,$de,$fe,$de
 	DATA BYTE $01,$de,$fe,$de,$01,$de,$fe,$de
 	DATA BYTE $00,$df,$ff,$df,$00,$ef,$ff,$ef
-	DATA BYTE $80,$ff,$f3,$ff,$00,$ff,$f3,$ff
-	DATA BYTE $00,$ff,$ff,$ff,$00,$ff,$fe,$ff
-	DATA BYTE $00,$ff,$fc,$ff,$00,$ff,$ff,$ff
-	DATA BYTE $80,$7f,$7f,$7f,$80,$7f,$7d,$7f
-	DATA BYTE $00,$cc,$b3,$ff,$00,$f9,$86,$ff
-	DATA BYTE $00,$fb,$04,$ff,$00,$bc,$47,$ff
-	DATA BYTE $00,$ff,$dc,$ff,$00,$fe,$f9,$ff
-	DATA BYTE $00,$f8,$f7,$ff,$00,$fa,$c5,$ff
-	DATA BYTE $07,$07,$c0,$ff,$04,$05,$c1,$fe
+	DATA BYTE $8c,$ff,$f3,$f3,$0c,$ff,$f3,$f3
+	DATA BYTE $00,$ff,$ff,$ff,$01,$ff,$fe,$fe
+	DATA BYTE $03,$ff,$fc,$fc,$00,$ff,$ff,$ff
+	DATA BYTE $80,$7f,$7f,$7f,$82,$7f,$7d,$7d
+	DATA BYTE $4c,$cc,$b3,$b3,$79,$f9,$86,$86
+	DATA BYTE $fb,$fb,$04,$04,$b8,$bc,$47,$47
+	DATA BYTE $23,$ff,$dc,$dc,$06,$fe,$f9,$f9
+	DATA BYTE $08,$f8,$f7,$f7,$3a,$fa,$c5,$c5
+	DATA BYTE $07,$00,$c0,$ff,$04,$01,$c1,$fe
 	DATA BYTE $00,$01,$41,$7e,$00,$49,$49,$36
-	DATA BYTE $04,$0d,$89,$b6,$00,$13,$93,$ac
+	DATA BYTE $04,$09,$89,$b6,$00,$13,$93,$ac
 	DATA BYTE $00,$31,$b1,$8e,$00,$31,$31,$0e
 	DATA BYTE $08,$c4,$c6,$04,$08,$c4,$c6,$04
 	DATA BYTE $08,$84,$87,$04,$04,$a2,$a3,$02
 	DATA BYTE $04,$a2,$a3,$02,$04,$82,$83,$02
-	DATA BYTE $04,$93,$93,$03,$02,$99,$89,$11
-	DATA BYTE $21,$eb,$42,$bd,$1c,$e0,$e0,$01
-	DATA BYTE $14,$09,$0b,$48,$39,$39,$9f,$39
-	DATA BYTE $35,$3f,$9f,$3f,$3f,$3f,$9f,$3f
-	DATA BYTE $3f,$3f,$9f,$3f,$1f,$1f,$ce,$1f
-	DATA BYTE $fb,$f8,$00,$f8,$f9,$fe,$06,$fa
+	DATA BYTE $04,$93,$93,$03,$12,$99,$89,$01
+	DATA BYTE $a9,$cb,$42,$bd,$1c,$e0,$e0,$01
+	DATA BYTE $14,$09,$0b,$48,$39,$19,$9f,$39
+	DATA BYTE $35,$1f,$9f,$3f,$3f,$1f,$9f,$3f
+	DATA BYTE $3f,$1f,$9f,$3f,$1f,$1f,$ce,$1f
+	DATA BYTE $fb,$f0,$00,$f8,$f9,$f6,$06,$fa
 	DATA BYTE $fe,$fe,$1a,$fe,$fc,$fe,$3f,$fe
 	DATA BYTE $ff,$ff,$7f,$ff,$ff,$ff,$7f,$ff
-	DATA BYTE $ff,$ff,$7f,$ff,$1f,$7f,$1f,$ff
-	DATA BYTE $c0,$2f,$08,$37,$60,$0f,$86,$19
-	DATA BYTE $54,$7e,$f2,$7d,$bc,$ff,$f2,$fd
-	DATA BYTE $fc,$ff,$f0,$ff,$fc,$ff,$f0,$ff
-	DATA BYTE $fc,$fe,$f0,$ff,$fc,$ff,$f3,$fc
+	DATA BYTE $ff,$ff,$7f,$ff,$7f,$7f,$1f,$ff
+	DATA BYTE $e7,$2f,$08,$37,$69,$0f,$86,$19
+	DATA BYTE $5c,$7a,$f2,$7d,$bd,$fb,$f2,$fd
+	DATA BYTE $ff,$ff,$f0,$ff,$ff,$ff,$f0,$ff
+	DATA BYTE $fe,$fe,$f0,$ff,$fc,$fb,$f3,$fc
 	DATA BYTE $00,$ef,$ff,$6f,$00,$6f,$7f,$6f
-	DATA BYTE $00,$a7,$bf,$27,$00,$a7,$3f,$a7
-	DATA BYTE $40,$e7,$3f,$e7,$c0,$c7,$3f,$c7
+	DATA BYTE $00,$a7,$bf,$27,$80,$a7,$3f,$a7
+	DATA BYTE $c0,$e7,$3f,$e7,$c0,$c7,$3f,$c7
 	DATA BYTE $00,$47,$7f,$87,$00,$c7,$ff,$47
-	DATA BYTE $80,$7f,$7e,$7f,$80,$7f,$5f,$7f
+	DATA BYTE $81,$7f,$7e,$7e,$a0,$7f,$5f,$5f
 	DATA BYTE $80,$7f,$7f,$7f,$80,$7f,$7f,$7f
 	DATA BYTE $40,$be,$be,$be,$40,$be,$be,$be
-	DATA BYTE $40,$bf,$bf,$bf,$80,$7f,$3f,$7f
-	DATA BYTE $00,$f0,$0f,$ff,$00,$b3,$cc,$ff
-	DATA BYTE $00,$a7,$58,$ff,$00,$0e,$70,$7e
-	DATA BYTE $00,$1c,$12,$1e,$00,$b8,$be,$be
-	DATA BYTE $00,$fc,$e3,$ff,$00,$f9,$06,$ff
+	DATA BYTE $40,$bf,$bf,$bf,$c0,$7f,$3f,$3f
+	DATA BYTE $f0,$f0,$0f,$0f,$33,$b3,$cc,$cc
+	DATA BYTE $a7,$a7,$58,$58,$0e,$0e,$70,$70
+	DATA BYTE $0c,$1c,$12,$12,$00,$b8,$be,$be
+	DATA BYTE $1c,$fc,$e3,$e3,$f9,$f9,$06,$06
 	DATA BYTE $00,$31,$31,$0e,$00,$1d,$1d,$02
 	DATA BYTE $00,$1f,$1f,$00,$00,$1f,$1f,$00
 	DATA BYTE $00,$7f,$7f,$00,$00,$3f,$3f,$00
 	DATA BYTE $00,$3e,$3e,$00,$00,$7e,$7e,$00
-	DATA BYTE $02,$b1,$89,$39,$02,$81,$b9,$39
+	DATA BYTE $32,$b1,$89,$09,$02,$81,$b9,$39
 	DATA BYTE $02,$81,$a1,$21,$01,$82,$92,$10
-	DATA BYTE $01,$00,$50,$50,$00,$06,$70,$76
-	DATA BYTE $00,$0c,$30,$3c,$00,$40,$79,$39
-	DATA BYTE $0f,$9f,$ef,$9f,$0f,$8f,$e7,$8f
-	DATA BYTE $0b,$cf,$e3,$cf,$02,$c7,$f0,$c7
-	DATA BYTE $00,$c3,$f8,$c3,$81,$61,$7c,$61
+	DATA BYTE $01,$00,$50,$50,$06,$06,$70,$70
+	DATA BYTE $0c,$0c,$30,$30,$00,$40,$79,$39
+	DATA BYTE $1f,$9f,$ef,$9f,$0f,$8f,$e7,$8f
+	DATA BYTE $0f,$c7,$e3,$cf,$07,$c7,$f0,$c7
+	DATA BYTE $03,$c3,$f8,$c3,$81,$60,$7c,$61
 	DATA BYTE $80,$60,$7e,$60,$40,$30,$3f,$30
-	DATA BYTE $1f,$1f,$1f,$ff,$df,$ff,$9f,$ff
-	DATA BYTE $df,$ff,$dd,$ff,$01,$43,$41,$83
-	DATA BYTE $5f,$df,$03,$ff,$7f,$ff,$01,$ff
-	DATA BYTE $ff,$ff,$7e,$ff,$3c,$7e,$3c,$7f
-	DATA BYTE $fc,$fc,$e0,$fe,$fc,$fc,$c0,$fe
-	DATA BYTE $f8,$f9,$c1,$fd,$f8,$f9,$c1,$fd
+	DATA BYTE $1f,$1f,$1f,$ff,$ff,$ff,$9f,$ff
+	DATA BYTE $ff,$ff,$dd,$ff,$03,$43,$41,$83
+	DATA BYTE $df,$8f,$03,$ff,$ff,$ff,$01,$ff
+	DATA BYTE $ff,$7f,$7e,$ff,$7e,$7e,$3c,$7f
+	DATA BYTE $fc,$f8,$e0,$fe,$fc,$f8,$c0,$fe
+	DATA BYTE $f8,$f9,$c1,$fd,$f8,$f1,$c1,$fd
 	DATA BYTE $e0,$e3,$83,$f9,$c0,$c3,$03,$f3
-	DATA BYTE $40,$67,$27,$c3,$00,$0f,$0f,$97
+	DATA BYTE $40,$27,$27,$c3,$00,$0f,$0f,$97
 	DATA BYTE $00,$c7,$ff,$47,$00,$cf,$ff,$cf
 	DATA BYTE $01,$8e,$fe,$8e,$01,$9e,$fe,$9e
 	DATA BYTE $01,$3e,$fe,$3e,$02,$7d,$fd,$7d
 	DATA BYTE $04,$fb,$fb,$fb,$08,$f7,$f7,$f7
-	DATA BYTE $80,$7f,$7e,$7f,$80,$7f,$3c,$7f
-	DATA BYTE $00,$fd,$fe,$ff,$00,$fc,$f8,$fc
-	DATA BYTE $00,$ff,$fd,$ff,$00,$ff,$f0,$ff
-	DATA BYTE $00,$ff,$fe,$ff,$00,$ff,$fc,$ff
-	DATA BYTE $00,$cb,$34,$ff,$00,$d3,$0c,$df
-	DATA BYTE $00,$16,$01,$17,$00,$30,$0f,$3f
-	DATA BYTE $00,$f4,$cb,$ff,$00,$dc,$22,$fe
-	DATA BYTE $00,$d6,$29,$ff,$00,$8e,$71,$ff
+	DATA BYTE $81,$7f,$7e,$7e,$c3,$7f,$3c,$3c
+	DATA BYTE $01,$fd,$fe,$fe,$04,$fc,$f8,$f8
+	DATA BYTE $02,$ff,$fd,$fd,$0f,$ff,$f0,$f0
+	DATA BYTE $01,$ff,$fe,$fe,$03,$ff,$fc,$fc
+	DATA BYTE $cb,$cb,$34,$34,$d3,$d3,$0c,$0c
+	DATA BYTE $16,$16,$01,$01,$30,$30,$0f,$0f
+	DATA BYTE $34,$f4,$cb,$cb,$dc,$dc,$22,$22
+	DATA BYTE $d6,$d6,$29,$29,$8e,$8e,$71,$71
 	DATA BYTE $00,$7e,$7e,$00,$00,$fe,$fe,$00
 	DATA BYTE $00,$b4,$f4,$40,$00,$34,$f4,$c0
-	DATA BYTE $00,$94,$74,$e0,$00,$84,$74,$f0
-	DATA BYTE $00,$84,$74,$f0,$00,$00,$ec,$ec
-	DATA BYTE $00,$02,$79,$7b,$00,$00,$2f,$2f
+	DATA BYTE $80,$94,$74,$60,$80,$84,$74,$70
+	DATA BYTE $80,$84,$74,$70,$00,$00,$ec,$ec
+	DATA BYTE $02,$02,$79,$79,$00,$00,$2f,$2f
 	DATA BYTE $00,$00,$06,$06,$00,$00,$02,$02
-	DATA BYTE $00,$00,$00,$00,$00,$31,$30,$01
-	DATA BYTE $00,$51,$56,$07,$00,$50,$52,$02
+	DATA BYTE $00,$00,$00,$00,$01,$31,$30,$00
+	DATA BYTE $01,$51,$56,$06,$00,$50,$52,$02
 	DATA BYTE $40,$38,$3f,$38,$60,$1c,$1f,$1c
-	DATA BYTE $20,$5c,$1f,$4c,$20,$de,$1f,$d6
-	DATA BYTE $20,$df,$1f,$db,$20,$df,$1f,$dd
-	DATA BYTE $10,$8f,$6f,$ee,$08,$27,$d7,$f7
-	DATA BYTE $0c,$1c,$80,$3c,$01,$01,$c0,$01
-	DATA BYTE $0f,$0f,$c0,$1f,$1f,$1f,$c0,$1f
-	DATA BYTE $1f,$9f,$c0,$9f,$0e,$ff,$f1,$ce
+	DATA BYTE $60,$5c,$1f,$0c,$e0,$de,$1f,$16
+	DATA BYTE $e0,$df,$1f,$1b,$e0,$df,$1f,$1d
+	DATA BYTE $90,$8f,$6f,$6e,$28,$27,$d7,$d7
+	DATA BYTE $1c,$18,$80,$3c,$01,$00,$c0,$01
+	DATA BYTE $0f,$00,$c0,$1f,$1f,$07,$c0,$1f
+	DATA BYTE $1f,$8f,$c0,$9f,$0e,$ff,$f1,$ce
 	DATA BYTE $00,$ff,$ff,$f1,$00,$ff,$ff,$3f
-	DATA BYTE $30,$3f,$0f,$37,$e0,$ff,$1f,$ef
-	DATA BYTE $e0,$ff,$1f,$ef,$80,$ff,$3f,$de
+	DATA BYTE $30,$0f,$0f,$37,$e0,$1f,$1f,$ef
+	DATA BYTE $e0,$9f,$1f,$ef,$c0,$ff,$3f,$de
 	DATA BYTE $80,$ff,$7f,$b9,$00,$ff,$ff,$e7
 	DATA BYTE $00,$ff,$ff,$1f,$00,$ff,$ff,$ff
 	DATA BYTE $18,$e7,$e7,$e7,$08,$f7,$f7,$d7
-	DATA BYTE $04,$fb,$f9,$3b,$02,$fd,$fc,$fd
+	DATA BYTE $06,$fb,$f9,$39,$03,$fd,$fc,$fc
 	DATA BYTE $01,$fe,$fe,$fe,$00,$ff,$ff,$ff
 	DATA BYTE $00,$ff,$ff,$ff,$03,$fc,$fc,$fc
-	DATA BYTE $00,$ff,$e0,$ff,$00,$ff,$a0,$ff
-	DATA BYTE $00,$ff,$00,$ff,$00,$fe,$01,$ff
-	DATA BYTE $00,$fa,$00,$fa,$80,$50,$28,$78
-	DATA BYTE $80,$50,$20,$70,$f0,$00,$06,$06
-	DATA BYTE $00,$8f,$70,$ff,$00,$e0,$1f,$ff
+	DATA BYTE $1f,$ff,$e0,$e0,$5f,$ff,$a0,$a0
+	DATA BYTE $ff,$ff,$00,$00,$fe,$fe,$01,$01
+	DATA BYTE $fa,$fa,$00,$00,$d0,$50,$28,$28
+	DATA BYTE $d0,$50,$20,$20,$f0,$00,$06,$06
+	DATA BYTE $8f,$8f,$70,$70,$e0,$e0,$1f,$1f
 	DATA BYTE $00,$00,$fe,$fe,$00,$00,$7f,$7f
-	DATA BYTE $00,$18,$46,$5e,$00,$18,$44,$5c
-	DATA BYTE $00,$08,$00,$08,$00,$00,$08,$08
+	DATA BYTE $18,$18,$46,$46,$18,$18,$44,$44
+	DATA BYTE $08,$08,$00,$00,$00,$00,$08,$08
 	DATA BYTE $00,$02,$da,$d8,$00,$07,$8f,$88
 	DATA BYTE $00,$07,$87,$80,$00,$04,$4e,$4a
-	DATA BYTE $00,$10,$8e,$9e,$00,$30,$cc,$fc
+	DATA BYTE $10,$10,$8e,$8e,$30,$30,$cc,$cc
 	DATA BYTE $00,$00,$ff,$ff,$01,$00,$9a,$9a
 	DATA BYTE $00,$50,$50,$00,$00,$60,$60,$00
 	DATA BYTE $07,$60,$60,$00,$18,$60,$67,$00
@@ -230,11 +230,11 @@ nun_char:
 	DATA BYTE $01,$00,$fe,$00,$01,$00,$fe,$00
 	DATA BYTE $01,$00,$fe,$00,$00,$00,$ff,$00
 	DATA BYTE $00,$00,$ff,$00,$00,$00,$ff,$00
-	DATA BYTE $00,$70,$00,$70,$00,$f0,$09,$f9
-	DATA BYTE $00,$d0,$2b,$fb,$80,$70,$0f,$7f
-	DATA BYTE $80,$60,$1f,$7f,$40,$30,$8f,$3f
-	DATA BYTE $40,$20,$9d,$3d,$40,$20,$9c,$3c
-	DATA BYTE $01,$20,$80,$a0,$02,$60,$91,$f0
+	DATA BYTE $70,$70,$00,$00,$f0,$f0,$09,$09
+	DATA BYTE $d0,$d0,$2b,$2b,$f0,$70,$0f,$0f
+	DATA BYTE $e0,$60,$1f,$1f,$70,$30,$8f,$0f
+	DATA BYTE $60,$20,$9d,$1d,$60,$20,$9c,$1c
+	DATA BYTE $21,$20,$80,$80,$62,$60,$91,$90
 	DATA BYTE $02,$00,$7d,$7c,$02,$00,$fd,$fc
 	DATA BYTE $02,$00,$f9,$f8,$02,$6c,$fd,$90
 	DATA BYTE $02,$7c,$7d,$00,$02,$00,$01,$00
